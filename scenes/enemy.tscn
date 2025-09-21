@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://deogaep64c1ev"]
+
+[ext_resource type="Script" uid="uid://d4fao6vp6fs57" path="res://scripts/enemy.gd" id="1_7p1mj"]
+[ext_resource type="PackedScene" uid="uid://oh28tb74mfbe" path="res://assets/models/man/scene.gltf" id="2_md0e3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_md0e3"]
+radius = 0.77
+height = 2.7638223
+
+[sub_resource type="Animation" id="Animation_md0e3"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ra3w"]
+_data = {
+&"new_animation": SubResource("Animation_md0e3")
+}
+
+[node name="Enemy" type="CharacterBody3D"]
+collision_layer = 3
+collision_mask = 2
+script = ExtResource("1_7p1mj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3846945, 0)
+shape = SubResource("CapsuleShape3D_md0e3")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0051663, 0)
+visible = false
+radius = 0.345
+
+[node name="EnemyArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0051663, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EnemyArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37952816, 0)
+shape = SubResource("CapsuleShape3D_md0e3")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 0, 1.2406417, 0)
+
+[node name="Sketchfab_Scene" parent="Node3D" instance=ExtResource("2_md0e3")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node3D/Sketchfab_Scene"]
+libraries = {
+&"": SubResource("AnimationLibrary_4ra3w")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
+[connection signal="area_entered" from="EnemyArea" to="." method="_on_area_3d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

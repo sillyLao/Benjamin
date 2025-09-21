@@ -1,0 +1,66 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dic8vi8f7m3cl"]
+
+[sub_resource type="SystemFont" id="SystemFont_bbx2r"]
+font_names = PackedStringArray("ShangoGothic ☞")
+font_weight = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uv366"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.85246056, 0.69671, 0.47470665, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6967598, 0.44992983, 0.20236814, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.6784314, 0.5019608, 0.14901961, 0.5882353)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yp40"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.48085272, 0.58061314, 0.9096832, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0.40784314, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0, 0, 0.40784314, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yx83t"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.75664335, 0.5050183, 0.20612597, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.5566786, 0.2639424, 0.11159981, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.5134087, 0.22562155, 0.055975474, 0.5882353)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[resource]
+Button/colors/font_color = Color(1.4439225e-06, 0, 0.58875334, 1)
+Button/colors/font_hover_color = Color(0, 0, 0.5882353, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0.5882353, 1)
+Button/font_sizes/font_size = 32
+Button/fonts/font = SubResource("SystemFont_bbx2r")
+Button/styles/hover = SubResource("StyleBoxFlat_uv366")
+Button/styles/normal = SubResource("StyleBoxFlat_6yp40")
+Button/styles/pressed = SubResource("StyleBoxFlat_yx83t")

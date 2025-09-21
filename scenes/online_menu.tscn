@@ -1,0 +1,274 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwvvrxi3msan5"]
+
+[ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_8wic7"]
+
+[sub_resource type="SystemFont" id="SystemFont_hetcf"]
+font_names = PackedStringArray("ShangoGothic ☞")
+font_weight = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wic7"]
+bg_color = Color(0.41795745, 0.2331801, 0.15511277, 1)
+
+[sub_resource type="Theme" id="Theme_uy4li"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_8wic7")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7r3x"]
+
+[node name="OnlineMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28235295, 0.13725491, 0.13333334, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_hetcf")
+theme_override_font_sizes/font_size = 86
+text = "ONLINE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -26.5
+offset_right = 97.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 369
+
+[node name="HOST" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_8wic7")
+theme_override_font_sizes/font_size = 61
+text = "HOST"
+
+[node name="JOIN" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme = ExtResource("1_8wic7")
+theme_override_font_sizes/font_size = 61
+text = "JOIN"
+
+[node name="HostPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -463.0
+offset_top = -148.0
+offset_right = -67.0
+offset_bottom = 261.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_uy4li")
+
+[node name="MarginContainer" type="MarginContainer" parent="HostPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Pseudo" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Pseudo"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+
+[node name="IP" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Room Name"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+
+[node name="PORT" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "PORT"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+
+[node name="MODE" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/MODE"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "MODE"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="OptionButton" parent="HostPanel/MarginContainer/VBoxContainer/MODE"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+item_count = 2
+popup/item_0/text = "PVP"
+popup/item_0/id = 0
+popup/item_1/text = "COOP"
+popup/item_1/id = 1
+
+[node name="HSeparator" type="HSeparator" parent="HostPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_q7r3x")
+
+[node name="HOST" type="Button" parent="HostPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_8wic7")
+theme_override_font_sizes/font_size = 61
+text = "HOST"
+
+[node name="JoinPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 67.0
+offset_top = -148.0
+offset_right = 463.0
+offset_bottom = 261.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_uy4li")
+
+[node name="MarginContainer" type="MarginContainer" parent="JoinPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JoinPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Pseudo" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "Pseudo"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+
+[node name="IP" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "IP"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+
+[node name="PORT" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+text = "PORT"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
+custom_minimum_size = Vector2(230, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 26
+
+[node name="MODE" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="JoinPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_q7r3x")
+
+[node name="JOIN" type="Button" parent="JoinPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_8wic7")
+theme_override_font_sizes/font_size = 61
+text = "JOIN"

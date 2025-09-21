@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr8p0h1yng7rq"]
+
+[ext_resource type="Script" uid="uid://cl5m8eyssn1ts" path="res://scenes/bullet.gd" id="1_mkf8s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h1aey"]
+albedo_color = Color(1, 0.12156863, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+emission_energy_multiplier = 9.41
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mkf8s"]
+height = 0.7
+radius = 0.1
+
+[node name="Bullet" type="RigidBody3D"]
+script = ExtResource("1_mkf8s")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+flip_faces = true
+radius = 0.05
+height = 0.7
+sides = 5
+material = SubResource("StandardMaterial3D_h1aey")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_mkf8s")
+
+[node name="BulletArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletArea"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_mkf8s")
