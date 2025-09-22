@@ -45,11 +45,18 @@ theme_override_font_sizes/font_size = 86
 text = "ONLINE"
 
 [node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 516.0
-offset_top = 540.0
-offset_right = 632.0
-offset_bottom = 593.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -53.0
+offset_right = 58.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
 focus_mode = 0
 theme = ExtResource("1_j8ywt")
 text = "START"
