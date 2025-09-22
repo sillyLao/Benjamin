@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cf4mrrjcp7djo"]
+[gd_scene load_steps=5 format=3 uid="uid://cf4mrrjcp7djo"]
 
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_j8ywt"]
+[ext_resource type="Script" uid="uid://cnbr2tfe5l7om" path="res://scripts/online_lobby_menu.gd" id="1_vdcme"]
+[ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="3_bfe55"]
 
 [sub_resource type="SystemFont" id="SystemFont_j8ywt"]
 font_names = PackedStringArray("ShangoGothic ☞")
@@ -13,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vdcme")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -44,6 +47,7 @@ offset_left = 516.0
 offset_top = 540.0
 offset_right = 632.0
 offset_bottom = 593.0
+focus_mode = 0
 theme = ExtResource("1_j8ywt")
 text = "START"
 
@@ -59,3 +63,16 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+
+[node name="BACK" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme = ExtResource("3_bfe55")
+text = "BACK"
+
+[connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]

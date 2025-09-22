@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwvvrxi3msan5"]
+[gd_scene load_steps=9 format=3 uid="uid://cwvvrxi3msan5"]
 
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_8wic7"]
+[ext_resource type="Script" uid="uid://y5fspv8virh2" path="res://scripts/online_menu.gd" id="1_uy4li"]
+[ext_resource type="PackedScene" uid="uid://cf4mrrjcp7djo" path="res://scenes/online_lobby_menu.tscn" id="2_q7r3x"]
+[ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="4_61shv"]
 
 [sub_resource type="SystemFont" id="SystemFont_hetcf"]
 font_names = PackedStringArray("ShangoGothic ☞")
 font_weight = 999
+subpixel_positioning = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8wic7"]
 bg_color = Color(0.41795745, 0.2331801, 0.15511277, 1)
@@ -21,6 +25,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_uy4li")
+online_lobby_scene = ExtResource("2_q7r3x")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -62,6 +71,7 @@ theme_override_constants/separation = 369
 [node name="HOST" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
 text = "HOST"
@@ -69,6 +79,7 @@ text = "HOST"
 [node name="JOIN" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+focus_mode = 0
 theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
 text = "JOIN"
@@ -111,7 +122,7 @@ text = "Pseudo"
 horizontal_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -127,7 +138,7 @@ text = "Room Name"
 horizontal_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -143,7 +154,7 @@ text = "PORT"
 horizontal_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -178,6 +189,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_q7r3x")
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
 text = "HOST"
@@ -220,7 +232,7 @@ text = "Pseudo"
 horizontal_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -236,7 +248,7 @@ text = "IP"
 horizontal_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -252,7 +264,7 @@ text = "PORT"
 horizontal_alignment = 1
 
 [node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
-custom_minimum_size = Vector2(230, 0)
+custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
@@ -269,6 +281,23 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_q7r3x")
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
 text = "JOIN"
+
+[node name="BACK" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme = ExtResource("4_61shv")
+text = "BACK"
+
+[connection signal="pressed" from="HBoxContainer/HOST" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="HBoxContainer/JOIN" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="HostPanel/MarginContainer/VBoxContainer/HOST" to="." method="_on_host_2_pressed"]
+[connection signal="pressed" from="JoinPanel/MarginContainer/VBoxContainer/JOIN" to="." method="_on_join_2_pressed"]
