@@ -30,8 +30,13 @@ func _connected_to_server():
 
 func _server_disconnected():
 	if not back_pressed:
+		UIOverlay.spawn_notification({
+			"icon" : "res://icon.svg",
+			"text" : Global.players_dict[1]["pseudo"] + " closed the lobby.",
+			"timer" : 5
+		})
 		Global.peer.close()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
 
 func create_infos() -> Dictionary:
 	var dict = {
@@ -40,13 +45,15 @@ func create_infos() -> Dictionary:
 	return dict
 
 @rpc("any_peer", "call_local", "reliable")
-func update_player_list(players_dict):
+func update_player_list(players_dict : Dictionary):
+	Global.players_dict = players_dict.duplicate(true)
 	for child in $PanelContainer/VBoxContainer.get_children():
 		child.queue_free()
 	for key in players_dict:
 		var label = Label.new()
 		label.text = players_dict[key]["pseudo"]
 		$PanelContainer/VBoxContainer.add_child(label)
+	print("[" + str(multiplayer.get_unique_id()) + "]" + str(Global.players_dict))
 
 @rpc("any_peer", "call_remote", "reliable")
 func send_infos(id:int, infos:Dictionary):
@@ -57,14 +64,13 @@ func send_infos(id:int, infos:Dictionary):
 		update_player_list.rpc(Global.players_dict)
 	
 
-
 func _on_back_pressed():
 	back_pressed = true
 	if Global.is_host: # Server
 		Global.peer.close()
 		Global.players_dict.clear()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
 	else: # Client
 		Global.peer.close()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
 		

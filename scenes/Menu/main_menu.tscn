@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://btpwb8p68miso" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_l6cm7"]
-[ext_resource type="PackedScene" uid="uid://bfvk33fc5yy8i" path="res://scenes/game.tscn" id="2_wu84c"]
-[ext_resource type="PackedScene" uid="uid://cwvvrxi3msan5" path="res://scenes/online_menu.tscn" id="3_wu84c"]
+[ext_resource type="PackedScene" uid="uid://cdhs7h0r6xalb" path="res://scenes/Game/playground.tscn" id="2_wu84c"]
+[ext_resource type="PackedScene" uid="uid://cwvvrxi3msan5" path="res://scenes/Menu/online_menu.tscn" id="3_wu84c"]
 
 [sub_resource type="SystemFont" id="SystemFont_ekxnf"]
 font_names = PackedStringArray("ShangoGothic ☞")
@@ -16,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_bqqt6")
 solo = ExtResource("2_wu84c")
 online = ExtResource("3_wu84c")
@@ -27,6 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.28235295, 0.13725491, 0.13333334, 1)
 
 [node name="Label" type="Label" parent="."]

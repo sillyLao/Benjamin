@@ -7,6 +7,7 @@
 [sub_resource type="SystemFont" id="SystemFont_j8ywt"]
 font_names = PackedStringArray("ShangoGothic ☞")
 font_weight = 999
+subpixel_positioning = 0
 
 [node name="OnlineLobbyMenu" type="Control"]
 layout_mode = 3
@@ -15,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_vdcme")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -24,6 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.28235295, 0.13725491, 0.13333334, 1)
 
 [node name="Label" type="Label" parent="."]

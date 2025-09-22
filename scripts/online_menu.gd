@@ -63,3 +63,7 @@ func connected(type : String):
 			Global.server_ip = join_ip
 			Global.is_host = false
 	get_tree().change_scene_to_packed(online_lobby_scene)
+
+
+func _on_back_pressed():
+	get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")

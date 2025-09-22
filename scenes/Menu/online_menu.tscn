@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_8wic7"]
 [ext_resource type="Script" uid="uid://y5fspv8virh2" path="res://scripts/online_menu.gd" id="1_uy4li"]
-[ext_resource type="PackedScene" uid="uid://cf4mrrjcp7djo" path="res://scenes/online_lobby_menu.tscn" id="2_q7r3x"]
+[ext_resource type="PackedScene" uid="uid://cf4mrrjcp7djo" path="res://scenes/Menu/online_lobby_menu.tscn" id="2_q7r3x"]
 [ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="4_61shv"]
 
 [sub_resource type="SystemFont" id="SystemFont_hetcf"]
@@ -25,6 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_uy4li")
 online_lobby_scene = ExtResource("2_q7r3x")
 
@@ -38,6 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.28235295, 0.13725491, 0.13333334, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -301,3 +303,4 @@ text = "BACK"
 [connection signal="pressed" from="HBoxContainer/JOIN" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="HostPanel/MarginContainer/VBoxContainer/HOST" to="." method="_on_host_2_pressed"]
 [connection signal="pressed" from="JoinPanel/MarginContainer/VBoxContainer/JOIN" to="." method="_on_join_2_pressed"]
+[connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]

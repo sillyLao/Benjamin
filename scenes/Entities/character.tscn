@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://duojgb1qoad5t"]
+[gd_scene load_steps=5 format=3 uid="uid://c7yek83phrvfv"]
 
 [ext_resource type="Script" uid="uid://bcgg2pxnjpheg" path="res://scripts/character.gd" id="1_lrhn5"]
 [ext_resource type="Script" uid="uid://y1jo3r1pq64x" path="res://scripts/camera_3d.gd" id="2_my7n2"]
@@ -17,29 +17,6 @@ shape = SubResource("CapsuleShape3D_fc0e3")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.607405, 0)
 script = ExtResource("2_my7n2")
-
-[node name="Control" type="Control" parent="Camera3D"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="Camera3D/Control"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1.5
-offset_top = -1.5
-offset_right = 1.5
-offset_bottom = 1.5
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0, 0, 1)
 
 [node name="gun" parent="Camera3D" instance=ExtResource("3_dp8ca")]
 transform = Transform3D(-0.000980867, 0, -0.0001946794, 3.5267007e-05, 0.0009834549, -0.00017768826, 0.00019145837, -0.00018115429, -0.0009646382, 0.34984332, -0.10836959, -0.33804965)

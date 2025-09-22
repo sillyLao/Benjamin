@@ -1,7 +1,7 @@
 extends Node3D
 
 @onready var player = $Character
-var enemy_scene = preload("res://scenes/enemy.tscn")
+var enemy_scene = preload("res://scenes/Entities/enemy.tscn")
 
 
 
