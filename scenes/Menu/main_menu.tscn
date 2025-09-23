@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3fu8xemlvr4i"]
+[gd_scene load_steps=7 format=3 uid="uid://c3fu8xemlvr4i"]
 
 [ext_resource type="Script" uid="uid://btpwb8p68miso" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://cdhs7h0r6xalb" path="res://scenes/Game/playground.tscn" id="2_wu84c"]
 [ext_resource type="PackedScene" uid="uid://cwvvrxi3msan5" path="res://scenes/Menu/online_menu.tscn" id="3_wu84c"]
+[ext_resource type="Texture2D" uid="uid://usy41nfmek1x" path="res://assets/20250919_212530.jpg" id="5_4q1m5"]
 
 [sub_resource type="SystemFont" id="SystemFont_ekxnf"]
 font_names = PackedStringArray("ShangoGothic ☞")
@@ -30,6 +31,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.28235295, 0.13725491, 0.13333334, 1)
+
+[node name="20250919212530" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.25
+anchor_right = 0.05
+anchor_bottom = 0.25
+offset_right = 828.0
+offset_bottom = 1128.0
+scale = Vector2(0.397343, 0.397343)
+texture = ExtResource("5_4q1m5")
+expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

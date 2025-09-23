@@ -1,29 +1,51 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7yek83phrvfv"]
+[gd_scene load_steps=7 format=3 uid="uid://c7yek83phrvfv"]
 
 [ext_resource type="Script" uid="uid://bcgg2pxnjpheg" path="res://scripts/character.gd" id="1_lrhn5"]
 [ext_resource type="Script" uid="uid://y1jo3r1pq64x" path="res://scripts/camera_3d.gd" id="2_my7n2"]
 [ext_resource type="PackedScene" uid="uid://dphomuebcrdf1" path="res://assets/models/gun/scene.gltf" id="3_dp8ca"]
+[ext_resource type="PackedScene" uid="uid://oh28tb74mfbe" path="res://assets/models/man/scene.gltf" id="4_uk1gh"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fc0e3"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_t8upq"]
+size = Vector3(1, 1.8269043, 0.2578125)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uk1gh"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
 
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 2
 script = ExtResource("1_lrhn5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_fc0e3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9238225, 0)
+shape = SubResource("BoxShape3D_t8upq")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.607405, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.657054, -0.1)
+fov = 90.0
 script = ExtResource("2_my7n2")
 
 [node name="gun" parent="Camera3D" instance=ExtResource("3_dp8ca")]
 transform = Transform3D(-0.000980867, 0, -0.0001946794, 3.5267007e-05, 0.0009834549, -0.00017768826, 0.00019145837, -0.00018115429, -0.0009646382, 0.34984332, -0.10836959, -0.33804965)
 
 [node name="PlayerArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83605397, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea"]
-shape = SubResource("CapsuleShape3D_fc0e3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.087768555, 0)
+shape = SubResource("BoxShape3D_t8upq")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("4_uk1gh")]
+transform = Transform3D(-0.001, 0, -8.742278e-11, 0, 0.001, 0, 8.742278e-11, 0, -0.001, 0, 0.83605397, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_uk1gh")
 
 [connection signal="area_entered" from="PlayerArea" to="." method="_on_player_area_area_entered"]

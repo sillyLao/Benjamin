@@ -53,7 +53,6 @@ func update_player_list(players_dict : Dictionary):
 		var label = Label.new()
 		label.text = players_dict[key]["pseudo"]
 		$PanelContainer/VBoxContainer.add_child(label)
-	print("[" + str(multiplayer.get_unique_id()) + "]" + str(Global.players_dict))
 
 @rpc("any_peer", "call_remote", "reliable")
 func send_infos(id:int, infos:Dictionary):
@@ -74,3 +73,10 @@ func _on_back_pressed():
 		Global.peer.close()
 		get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
 		
+
+func _on_start_game_pressed():
+	start_game.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func start_game():
+	get_tree().change_scene_to_file("res://scenes/Game/map_test.tscn")

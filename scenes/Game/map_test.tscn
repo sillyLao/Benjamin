@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdoc62m43f07n"]
+
+[ext_resource type="Script" uid="uid://rtwfhd0vs7p6" path="res://scripts/map_test.gd" id="1_nvmba"]
+[ext_resource type="Texture2D" uid="uid://usy41nfmek1x" path="res://assets/20250919_212530.jpg" id="1_oaswn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_nvmba"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ejtj7"]
+sky_material = SubResource("ProceduralSkyMaterial_nvmba")
+
+[sub_resource type="Environment" id="Environment_mxxsx"]
+background_mode = 2
+sky = SubResource("Sky_ejtj7")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nvmba"]
+albedo_texture = ExtResource("1_oaswn")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[node name="MapTest" type="Node3D"]
+script = ExtResource("1_nvmba")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mxxsx")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.2617188, 0)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+size = Vector3(40, 0.477, 40)
+material = SubResource("StandardMaterial3D_nvmba")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://c7yek83phrvfv")
+spawn_path = NodePath("..")

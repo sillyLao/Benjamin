@@ -44,7 +44,7 @@ theme_override_fonts/font = SubResource("SystemFont_j8ywt")
 theme_override_font_sizes/font_size = 86
 text = "ONLINE"
 
-[node name="Button" type="Button" parent="."]
+[node name="StartGame" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -85,4 +85,5 @@ focus_mode = 0
 theme = ExtResource("3_bfe55")
 text = "BACK"
 
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]
