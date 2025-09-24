@@ -75,8 +75,18 @@ func _on_back_pressed():
 		
 
 func _on_start_game_pressed():
-	start_game.rpc()
+	if Global.is_host:
+		start_game.rpc()
 
 @rpc("authority", "call_local", "reliable")
 func start_game():
 	get_tree().change_scene_to_file("res://scenes/Game/map_test.tscn")
+
+
+func _on_copy_ip_pressed():
+	DisplayServer.clipboard_set(Global.server_ip)
+	UIOverlay.spawn_notification({
+		"icon" : "res://icon.svg",
+		"text" : "IP copied to clipboard !",
+		"timer" : 1.5
+	})

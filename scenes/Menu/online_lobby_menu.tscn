@@ -85,5 +85,17 @@ focus_mode = 0
 theme = ExtResource("3_bfe55")
 text = "BACK"
 
+[node name="CopyIP" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 165.0
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme = ExtResource("3_bfe55")
+text = "COPY IP"
+
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CopyIP" to="." method="_on_copy_ip_pressed"]
