@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://denv2whxt2gd3"]
+[gd_scene load_steps=5 format=3 uid="uid://denv2whxt2gd3"]
 
 [ext_resource type="Script" uid="uid://cvhxm20chx2nu" path="res://scripts/ui_overlay.gd" id="1_3i566"]
+[ext_resource type="Texture2D" uid="uid://lgkupfsrrvo2" path="res://assets/ui/cursor.png" id="2_rtbcl"]
+[ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="3_aisqu"]
+
+[sub_resource type="SystemFont" id="SystemFont_g0uky"]
+font_names = PackedStringArray("ShangoGothic ☞")
+font_weight = 999
 
 [node name="UIOverlay" type="Control"]
 z_index = 2
@@ -13,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_3i566")
 
 [node name="IG UI" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,20 +27,85 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="IG UI"]
+[node name="TextureRect" type="TextureRect" parent="IG UI"]
+self_modulate = Color(1, 1, 1, 0.65882355)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1.5
-offset_top = -1.5
-offset_right = 1.5
-offset_bottom = 1.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 0, 1)
+texture = ExtResource("2_rtbcl")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.5803922)
+
+[node name="Label" type="Label" parent="PauseMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_g0uky")
+theme_override_font_sizes/font_size = 86
+text = "PAUSE"
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -26.5
+offset_right = 72.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Resume" type="Button" parent="PauseMenu/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_aisqu")
+text = "Resume"
+
+[node name="Options" type="Button" parent="PauseMenu/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_aisqu")
+text = "Options"
+
+[node name="Quit" type="Button" parent="PauseMenu/ColorRect/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_aisqu")
+text = "QUIT"
 
 [node name="Notifications" type="Control" parent="."]
 layout_mode = 1
@@ -42,6 +114,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Notifications"]
 custom_minimum_size = Vector2(250, 0)
@@ -56,3 +129,7 @@ offset_top = -7.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/separation = 1
+
+[connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -80,6 +80,8 @@ func _on_start_game_pressed():
 
 @rpc("authority", "call_local", "reliable")
 func start_game():
+	Global.in_game = true
+	Global.switch_to_game()
 	get_tree().change_scene_to_file("res://scenes/Game/map_test.tscn")
 
 

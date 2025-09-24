@@ -48,6 +48,11 @@ shoot={
 ]
 }
 
+[physics]
+
+3d/default_gravity_vector=Vector3(0, -1.5, 0)
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+anti_aliasing/quality/msaa_3d=1

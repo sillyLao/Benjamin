@@ -27,7 +27,7 @@ func _on_join_pressed():
 	$HostPanel.hide()
 	$JoinPanel.show()
 func _on_host_2_pressed():
-	var result = peer.create_server(51779)
+	var result = peer.create_server(51779, 7)
 	match result:
 		Error.OK:
 			print("OK")
