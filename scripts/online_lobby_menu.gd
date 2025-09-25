@@ -100,11 +100,10 @@ func _on_copy_ip_pressed():
 @rpc("any_peer", "call_local", "reliable")
 func set_ready(id: int, is_ready : bool):
 	Global.players_dict[id]["ready"] = is_ready
-	update_ready()
 
 func _on_ready_toggled(toggled_on):
-	send_ready_infos.rpc(multiplayer.get_unique_id(), $HBoxContainer/ColorPickerButton.color)
 	set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
+	send_ready_infos.rpc(multiplayer.get_unique_id(), $HBoxContainer/ColorPickerButton.color)
 
 func update_ready():
 	var n := 0
@@ -120,6 +119,7 @@ func update_ready():
 	else:
 		$StartGame.disabled = true
 		$StartGame.text = str(n)+"/"+str(len(Global.players_dict))+" ready"
+	print("["+str(multiplayer.get_unique_id())+"] " + str(Global.players_dict))
 
 @rpc("any_peer", "call_local", "reliable")
 func send_ready_infos(id:int, laser_color: Color):

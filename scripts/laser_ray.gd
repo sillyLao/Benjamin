@@ -6,6 +6,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	transparency += delta
-	material.emission_energy_multiplier += -delta*16
+	material.emission_energy_multiplier += -delta*8
 	if transparency == 1:
 		queue_free()

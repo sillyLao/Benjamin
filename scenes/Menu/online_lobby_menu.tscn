@@ -138,7 +138,6 @@ layout_mode = 2
 color = Color(1, 1, 1, 1)
 
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="Ready" to="." method="_on_ready_pressed"]
 [connection signal="toggled" from="Ready" to="." method="_on_ready_toggled"]
 [connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="CopyIP" to="." method="_on_copy_ip_pressed"]
