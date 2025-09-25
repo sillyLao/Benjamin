@@ -2,6 +2,7 @@ extends Control
 
 @onready var ammos = $"IG UI/Ammos/Label"
 @onready var ammos_progress = $"IG UI/Ammos/ProgressBar"
+@onready var scale_bar = $"IG UI/ScaleBar/ProgressBar"
 
 var notification_scene : PackedScene = preload("res://scenes/UI/notification.tscn")
 

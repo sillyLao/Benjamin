@@ -24,6 +24,8 @@ func _ready():
 		laser_color = Global.players_dict[int(name)]["laser_color"]
 		update_ammos()
 		$RegainAmmoTimer.start()
+		UIOverlay.scale_bar.value = 1
+		UIOverlay.scale_bar.self_modulate = Color(0.0, 0.7, 0.0)
 
 func _physics_process(delta):
 	var input_dir
@@ -51,10 +53,18 @@ func _physics_process(delta):
 		
 		if not ammos == MAX_AMMOS:
 			UIOverlay.ammos_progress.value = (1-($RegainAmmoTimer.time_left/$RegainAmmoTimer.wait_time))*100
-		
-	scale = clamp(scale + Vector3.ONE*0.01*delta, Vector3.ONE*0.1, Vector3.ONE)
-	if not input_dir and is_on_floor():
-		scale = clamp(scale + Vector3.ONE*0.03*delta, Vector3.ONE*0.2, Vector3.ONE)
+	
+		if not scale.x == 1:
+			scale = clamp(scale + Vector3.ONE*0.01*delta, Vector3.ONE*0.1, Vector3.ONE)
+			if not input_dir and is_on_floor():
+				scale = clamp(scale + Vector3.ONE*0.03*delta, Vector3.ONE*0.2, Vector3.ONE)
+			UIOverlay.scale_bar.value = scale.x
+			if scale.x > 0.6:
+				UIOverlay.scale_bar.self_modulate = Color(1.0, 0.7, 0.0).lerp(Color(0.0, 0.7, 0.0), (scale.x-0.6)*2.5)
+			elif scale.x > 0.3:
+				UIOverlay.scale_bar.self_modulate = Color(0.8, 0.0, 0.0).lerp(Color(1.0, 0.7, 0.0), (scale.x-0.3)*(1/0.3))
+			else:
+				UIOverlay.scale_bar.self_modulate = Color(0.8, 0.0, 0.0)
 
 func _input(event : InputEvent) -> void:
 	if is_multiplayer_authority() and not Global.paused and not is_dead:
@@ -117,11 +127,11 @@ func touched(from: int, to: int):
 	#})
 	var node : CharacterBody3D = get_node("../"+str(to))
 	node.scale -= Vector3.ONE*0.2
-	if node.scale.x < 0.1:
+	if node.scale.x <= 0.1:
 		node.is_dead = true
 		UIOverlay.spawn_notification({
 			"icon" : "res://icon.svg",
-			"text" : "Vous avez été rétréci par " + Global.players_dict[from]["pseudo"] + ".",
+			"text" : "Vous avez été rétréci.e par " + Global.players_dict[from]["pseudo"] + ".",
 			"timer" : 3
 		})
 		killed_someone.rpc_id(from, to)
@@ -180,6 +190,28 @@ func respawn():
 	$RegainAmmoTimer.start()
 	ammos = 4
 	update_ammos()
+	UIOverlay.scale_bar.value = 1
+	UIOverlay.scale_bar.self_modulate = Color(0.0, 0.7, 0.0)
 
 func update_ammos():
 	UIOverlay.ammos.text = str(ammos) + " / " + str(MAX_AMMOS)
+
+func _on_feet_box_area_entered(area):
+	if area.name == "PlayerArea":
+		var player : CharacterBody3D = area.get_parent()
+		if player.scale.x <= 0.3 and not player == self:
+			print("["+str(multiplayer.get_unique_id())+"] " + str(player))
+			crush_player.rpc_id(int(player.name), int(name), int(player.name))
+
+@rpc("any_peer", "call_remote", "reliable")
+func crush_player(from: int, to: int):
+	var player : CharacterBody3D = get_node("../" + str(to))
+	player.is_dead = true
+	UIOverlay.spawn_notification({
+		"icon" : "res://icon.svg",
+		"text" : "Vous avez été écrasé.e par " + Global.players_dict[from]["pseudo"] + ".",
+		"timer" : 3
+	})
+	killed_someone.rpc_id(from, to)
+	disappear.rpc(to)
+	player.get_node("RespawnTimer").start()

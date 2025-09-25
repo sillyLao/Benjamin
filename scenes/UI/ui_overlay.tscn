@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://denv2whxt2gd3"]
+[gd_scene load_steps=11 format=3 uid="uid://denv2whxt2gd3"]
 
 [ext_resource type="Script" uid="uid://cvhxm20chx2nu" path="res://scripts/ui_overlay.gd" id="1_3i566"]
 [ext_resource type="Texture2D" uid="uid://lgkupfsrrvo2" path="res://assets/ui/cursor.png" id="2_rtbcl"]
@@ -10,6 +10,32 @@ bg_color = Color(0, 0, 0, 0.20784314)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaqk0"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvqy2"]
+bg_color = Color(0.171875, 0.171875, 0.171875, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.08203125, 0.08203125, 0.08203125, 1)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oviv7"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wf6i"]
 
 [sub_resource type="SystemFont" id="SystemFont_g0uky"]
 font_names = PackedStringArray("ShangoGothic ☞")
@@ -32,6 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Crosshair" type="TextureRect" parent="IG UI"]
 self_modulate = Color(1, 1, 1, 0.65882355)
@@ -71,6 +98,65 @@ layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_g0uky")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jaqk0")
 show_percentage = false
+
+[node name="ScaleBar" type="Control" parent="IG UI"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_right = -18.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="PBBackground" type="ProgressBar" parent="IG UI/ScaleBar"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_gvqy2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oviv7")
+min_value = 0.2
+max_value = 1.0
+value = 0.2
+fill_mode = 3
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="IG UI/ScaleBar"]
+self_modulate = Color(0, 0.85490197, 0, 1)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = -256.0
+offset_bottom = 256.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_4wf6i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_oviv7")
+min_value = 0.2
+max_value = 1.0
+value = 0.30000000000000004
+fill_mode = 3
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="IG UI/ScaleBar/ProgressBar"]
+layout_mode = 0
+offset_top = 435.0
+offset_right = 39.0
+offset_bottom = 441.0
+color = Color(0.7293979, 0.07846785, 0.07846785, 1)
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false

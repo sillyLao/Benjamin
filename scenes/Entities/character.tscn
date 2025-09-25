@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7yek83phrvfv"]
+[gd_scene load_steps=9 format=3 uid="uid://c7yek83phrvfv"]
 
 [ext_resource type="Script" uid="uid://bcgg2pxnjpheg" path="res://scripts/character.gd" id="1_lrhn5"]
 [ext_resource type="Script" uid="uid://y1jo3r1pq64x" path="res://scripts/camera_3d.gd" id="2_my7n2"]
@@ -23,6 +23,10 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uk1gh"]
+height = 0.16708985
+radius = 0.3
 
 [node name="Character" type="CharacterBody3D"]
 collision_layer = 2
@@ -52,6 +56,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83605397, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.030854523, 0)
 shape = SubResource("CapsuleShape3D_uk1gh")
+debug_color = Color(0, 0.70196074, 0.038601026, 0.41960785)
 
 [node name="Sketchfab_Scene" parent="." instance=ExtResource("4_uk1gh")]
 transform = Transform3D(-0.001, 0, -8.742278e-11, 0, 0.001, 0, 8.742278e-11, 0, -0.001, 0, 0.83605397, 0)
@@ -67,5 +72,13 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
+[node name="FeetBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FeetBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09354493, 0)
+shape = SubResource("CylinderShape3D_uk1gh")
+debug_color = Color(0.70196074, 0, 0.0154072065, 0.41960785)
+
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
 [connection signal="timeout" from="RegainAmmoTimer" to="." method="_on_regain_ammo_timer_timeout"]
+[connection signal="area_entered" from="FeetBox" to="." method="_on_feet_box_area_entered"]
