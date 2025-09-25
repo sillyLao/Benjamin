@@ -6,6 +6,7 @@ var available_respawns : Array
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if Global.is_host: # Server
+		Global.player_quits.connect(_on_player_quits)
 		for node in get_node("Map/Respawns").get_children():
 			available_respawns.append(node)
 		spawn_players()
@@ -35,3 +36,6 @@ func respawn(id : int):
 	var respawn_node = available_respawns.pop_at(n)
 	respawn_node.get_node("Timer").start()
 	get_node(str(id)).respawn_at.rpc_id(id, respawn_node.name)
+
+func _on_player_quits(id: int):
+	get_node(str(id)).queue_free()

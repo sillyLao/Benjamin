@@ -1,5 +1,6 @@
 extends Node
 
+
 var paused : bool = false
 var in_game : bool = false
 
@@ -18,6 +19,9 @@ func switch_to_game():
 
 
 # ---- ONLINE ----
+
+signal player_quits(id: int)
+
 var pseudo : String
 var server_ip : String
 var is_host : bool
@@ -39,6 +43,8 @@ func _peer_disconnected(id):
 			"text" : Global.players_dict[id]["pseudo"] + " disconnected from the lobby.",
 			"timer" : 5
 		})
+	if is_host:
+		player_quits.emit(id)
 
 func _server_disconnected():
 	if not Global.is_host:
