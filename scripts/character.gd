@@ -4,6 +4,8 @@ extends CharacterBody3D
 
 const SPEED = 10.0
 var JUMP_VELOCITY = 7.5
+const MAX_AMMOS = 10
+var ammos = 2
 var bullet_scene = preload("res://scenes/Entities/bullet.tscn")
 var laser_scene = preload("res://scenes/Entities/laser_ray.tscn")
 var is_dead : bool = false
@@ -20,6 +22,8 @@ func _ready():
 		$Label3D.hide()
 		$Camera3D.make_current()
 		laser_color = Global.players_dict[int(name)]["laser_color"]
+		update_ammos()
+		$RegainAmmoTimer.start()
 
 func _physics_process(delta):
 	var input_dir
@@ -45,9 +49,12 @@ func _physics_process(delta):
 			velocity += get_gravity() * delta
 		move_and_slide()
 		
+		if not ammos == MAX_AMMOS:
+			UIOverlay.ammos_progress.value = (1-($RegainAmmoTimer.time_left/$RegainAmmoTimer.wait_time))*100
+		
 	scale = clamp(scale + Vector3.ONE*0.01*delta, Vector3.ONE*0.1, Vector3.ONE)
-	if input_dir:
-		scale = clamp(scale + Vector3.ONE*0.03*delta, Vector3.ONE*0.1, Vector3.ONE)
+	if not input_dir and is_on_floor():
+		scale = clamp(scale + Vector3.ONE*0.03*delta, Vector3.ONE*0.2, Vector3.ONE)
 
 func _input(event : InputEvent) -> void:
 	if is_multiplayer_authority() and not Global.paused and not is_dead:
@@ -55,12 +62,17 @@ func _input(event : InputEvent) -> void:
 			shoot()
 
 func shoot():
-	create_laser.rpc(int(name), get_laser_parameters())
-	var hitscan = get_camera_collision()
-	if hitscan:
-		var collider : Node = hitscan.collider
-		if collider.name == "PlayerArea": # Player hit
-			touched.rpc_id(int(collider.get_parent().name), int(name), int(collider.get_parent().name))
+	if ammos:
+		if ammos == MAX_AMMOS:
+			$RegainAmmoTimer.start()
+		ammos += -1
+		update_ammos()
+		create_laser.rpc(int(name), get_laser_parameters())
+		var hitscan = get_camera_collision()
+		if hitscan:
+			var collider : Node = hitscan.collider
+			if collider.name == "PlayerArea": # Player hit
+				touched.rpc_id(int(collider.get_parent().name), int(name), int(collider.get_parent().name))
 			
 
 func get_camera_collision():
@@ -129,6 +141,8 @@ func disappear(id : int): # is killed
 	var player = get_parent().get_node(str(id))
 	player.hide()
 	player.get_node("PlayerArea").collision_layer = 0
+	if int(name) == id:
+		die()
 
 @rpc("any_peer", "call_local", "reliable")
 func ask_for_respawn(id : int):
@@ -141,6 +155,7 @@ func respawn_at(pos : String):
 	is_dead = false
 	scale = Vector3.ONE
 	respawn_player.rpc(int(name))
+	respawn()
 
 @rpc("any_peer", "call_local", "reliable")
 func respawn_player(id : int):
@@ -150,3 +165,21 @@ func respawn_player(id : int):
 
 func _on_respawn_timer_timeout():
 	ask_for_respawn.rpc_id(1, int(name))
+
+func _on_regain_ammo_timer_timeout():
+	ammos += 1
+	update_ammos()
+	if not ammos == MAX_AMMOS:
+		$RegainAmmoTimer.start()
+
+func die():
+	$RegainAmmoTimer.paused = true
+
+func respawn():
+	$RegainAmmoTimer.paused = false
+	$RegainAmmoTimer.start()
+	ammos = 4
+	update_ammos()
+
+func update_ammos():
+	UIOverlay.ammos.text = str(ammos) + " / " + str(MAX_AMMOS)

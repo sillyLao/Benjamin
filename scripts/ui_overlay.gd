@@ -1,5 +1,8 @@
 extends Control
 
+@onready var ammos = $"IG UI/Ammos/Label"
+@onready var ammos_progress = $"IG UI/Ammos/ProgressBar"
+
 var notification_scene : PackedScene = preload("res://scenes/UI/notification.tscn")
 
 func _ready():
@@ -13,6 +16,13 @@ func spawn_notification(infos : Dictionary) -> void:
 	notif.get_node("Timer").wait_time = infos["timer"]
 	$Notifications/VBoxContainer.add_child(notif)
 
+#func _input(event):
+	#if event.is_action_pressed("right"):
+		#UIOverlay.spawn_notification({
+			#"icon": "res://icon.svg",
+			#"text": "GOT VOOTEED",
+			#"timer": 3
+		#})
 
 func _on_resume_pressed():
 	$PauseMenu.hide()

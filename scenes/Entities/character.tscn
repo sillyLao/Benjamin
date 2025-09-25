@@ -63,4 +63,9 @@ replication_config = SubResource("SceneReplicationConfig_uk1gh")
 wait_time = 3.0
 one_shot = true
 
+[node name="RegainAmmoTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
+[connection signal="timeout" from="RegainAmmoTimer" to="." method="_on_regain_ammo_timer_timeout"]

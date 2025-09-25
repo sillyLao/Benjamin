@@ -931,56 +931,56 @@ material = SubResource("StandardMaterial3D_wmjjy")
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.671806, -1.1145021, -32.851112)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 4.229004
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.536163, -1.1145021, -33.755333)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 4.229004
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(0.914988, 0, -0.40348148, 0, 1, 0, 0.40348148, 0, 0.914988, -18.978, -0.7799684, -34.554882)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 4.8980713
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(0.914988, 0, -0.40348148, 0, 1, 0, 0.40348148, 0, 0.914988, -19.404041, -0.82385266, -35.730984)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 4.8103027
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D7" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(0.914988, 0, -0.40348148, 0, 1, 0, 0.40348148, 0, 0.914988, -9.500549, -0.12020886, -38.580704)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 6.2175903
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D8" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(0.914988, 0, -0.40348148, 0, 1, 0, 0.40348148, 0, 0.914988, -9.92659, -0.16970837, -39.756805)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 6.1185913
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.931755, -1.1145021, -23.771582)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 4.229004
 material = SubResource("StandardMaterial3D_wmjjy")
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Map/Outside/Platform"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.796112, -1.1145021, -24.675802)
 use_collision = true
-radius = 0.2
+radius = 0.25
 height = 4.229004
 material = SubResource("StandardMaterial3D_wmjjy")
 
