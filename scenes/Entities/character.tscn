@@ -69,7 +69,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="RegainAmmoTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.6
 one_shot = true
 
 [node name="FeetBox" type="Area3D" parent="."]

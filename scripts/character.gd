@@ -65,6 +65,8 @@ func _physics_process(delta):
 				UIOverlay.scale_bar.self_modulate = Color(0.8, 0.0, 0.0).lerp(Color(1.0, 0.7, 0.0), (scale.x-0.3)*(1/0.3))
 			else:
 				UIOverlay.scale_bar.self_modulate = Color(0.8, 0.0, 0.0)
+			if is_on_ceiling() and is_on_floor():
+				crushed_too_big()
 
 func _input(event : InputEvent) -> void:
 	if is_multiplayer_authority() and not Global.paused and not is_dead:
@@ -83,6 +85,7 @@ func shoot():
 			var collider : Node = hitscan.collider
 			if collider.name == "PlayerArea": # Player hit
 				touched.rpc_id(int(collider.get_parent().name), int(name), int(collider.get_parent().name))
+				UIOverlay.animation_player.play("crosshair_hit")
 			
 
 func get_camera_collision():
@@ -134,15 +137,21 @@ func touched(from: int, to: int):
 			"text" : "Vous avez été rétréci.e par " + Global.players_dict[from]["pseudo"] + ".",
 			"timer" : 3
 		})
-		killed_someone.rpc_id(from, to)
+		killed_someone.rpc_id(from, to, "shrink")
 		disappear.rpc(to)
 		node.get_node("RespawnTimer").start()
 
 @rpc("any_peer", "call_remote", "reliable")
-func killed_someone(from: int):
+func killed_someone(from: int, method: String):
+	var text : String
+	match method:
+		"shrink":
+			text = "Vous avez rétréci " + Global.players_dict[from]["pseudo"] + " !!"
+		"crush":
+			text = "Vous avez écrasé " + Global.players_dict[from]["pseudo"] + " !!"
 	UIOverlay.spawn_notification({
 		"icon" : "res://icon.svg",
-		"text" : "Vous avez rétréci " + Global.players_dict[from]["pseudo"] + " !!",
+		"text" : text,
 		"timer" : 3
 	})
 
@@ -212,6 +221,16 @@ func crush_player(from: int, to: int):
 		"text" : "Vous avez été écrasé.e par " + Global.players_dict[from]["pseudo"] + ".",
 		"timer" : 3
 	})
-	killed_someone.rpc_id(from, to)
+	killed_someone.rpc_id(from, to, "crush")
 	disappear.rpc(to)
 	player.get_node("RespawnTimer").start()
+
+func crushed_too_big():
+	is_dead = true
+	UIOverlay.spawn_notification({
+		"icon" : "res://icon.svg",
+		"text" : "Vous avez été écrasé.e sous le plafond....",
+		"timer" : 3
+	})
+	disappear.rpc(int(name))
+	get_node("RespawnTimer").start()

@@ -113,29 +113,56 @@ focus_mode = 0
 theme = ExtResource("3_bfe55")
 text = "COPY IP"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 0
-anchor_left = 0.5789931
-anchor_top = 0.30555555
-anchor_right = 0.8394097
-anchor_bottom = 0.36728394
-offset_right = -260.0
+[node name="Options" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5494792
+anchor_top = 0.25154322
+anchor_right = 0.8810764
+anchor_bottom = 0.6898148
+offset_top = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Options"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 8.0
+offset_right = 150.0
+offset_bottom = 58.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Options/HBoxContainer"]
 layout_mode = 2
 text = "Laser color"
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Options/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_046sn")
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Options/HBoxContainer"]
+custom_minimum_size = Vector2(80, 50)
 layout_mode = 2
 color = Color(1, 1, 1, 1)
+
+[node name="BlockOptions" type="ColorRect" parent="Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.40300003)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 50.0
 
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="toggled" from="Ready" to="." method="_on_ready_toggled"]

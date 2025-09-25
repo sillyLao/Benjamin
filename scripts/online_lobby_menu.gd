@@ -3,6 +3,7 @@ extends Control
 var back_pressed : bool = false
 
 func _ready():
+	$Options/BlockOptions.hide()
 	update_ready()
 	if Global.is_host: # Server
 		multiplayer.peer_connected.connect(_peer_connected)
@@ -103,7 +104,8 @@ func set_ready(id: int, is_ready : bool):
 
 func _on_ready_toggled(toggled_on):
 	set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
-	send_ready_infos.rpc(multiplayer.get_unique_id(), $HBoxContainer/ColorPickerButton.color)
+	send_ready_infos.rpc(multiplayer.get_unique_id(), $Options/HBoxContainer/ColorPickerButton.color)
+	$Options/BlockOptions.visible = toggled_on
 
 func update_ready():
 	var n := 0
@@ -119,7 +121,6 @@ func update_ready():
 	else:
 		$StartGame.disabled = true
 		$StartGame.text = str(n)+"/"+str(len(Global.players_dict))+" ready"
-	print("["+str(multiplayer.get_unique_id())+"] " + str(Global.players_dict))
 
 @rpc("any_peer", "call_local", "reliable")
 func send_ready_infos(id:int, laser_color: Color):
