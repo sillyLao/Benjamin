@@ -4,6 +4,7 @@ extends Control
 @export var online : PackedScene
 
 func _ready():
+	UIOverlay.get_node("IG UI").hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_solo_pressed():

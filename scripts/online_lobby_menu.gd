@@ -3,11 +3,11 @@ extends Control
 var back_pressed : bool = false
 
 func _ready():
+	update_ready()
 	if Global.is_host: # Server
 		multiplayer.peer_connected.connect(_peer_connected)
 		multiplayer.peer_disconnected.connect(_peer_disconnected)
 		var infos = create_infos()
-		infos["order"] = Global.player_count
 		Global.player_count += 1
 		Global.players_dict[multiplayer.get_unique_id()] = infos
 		update_player_list.rpc(Global.players_dict)
@@ -41,6 +41,8 @@ func _server_disconnected():
 func create_infos() -> Dictionary:
 	var dict = {
 		"pseudo" = Global.pseudo,
+		"order" = 1,
+		"ready" = false
 	}
 	return dict
 
@@ -53,11 +55,13 @@ func update_player_list(players_dict : Dictionary):
 		var label = Label.new()
 		label.text = players_dict[key]["pseudo"]
 		$PanelContainer/VBoxContainer.add_child(label)
+	update_ready()
 
 @rpc("any_peer", "call_remote", "reliable")
 func send_infos(id:int, infos:Dictionary):
 	if Global.is_host:
 		infos["order"] = Global.player_count
+		infos["ready"] = false
 		Global.player_count += 1
 		Global.players_dict[id] = infos
 		update_player_list.rpc(Global.players_dict)
@@ -92,3 +96,33 @@ func _on_copy_ip_pressed():
 		"text" : "IP copied to clipboard !",
 		"timer" : 1.5
 	})
+
+@rpc("any_peer", "call_local", "reliable")
+func set_ready(id: int, is_ready : bool):
+	Global.players_dict[id]["ready"] = is_ready
+	update_ready()
+
+func _on_ready_toggled(toggled_on):
+	send_ready_infos.rpc(multiplayer.get_unique_id(), $HBoxContainer/ColorPickerButton.color)
+	set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
+
+func update_ready():
+	var n := 0
+	for id in Global.players_dict:
+		if Global.players_dict[id]["ready"]:
+			n += 1
+	if n == len(Global.players_dict):
+		if Global.is_host:
+			$StartGame.disabled = false
+			$StartGame.text = "Start"
+		else:
+			$StartGame.text = "Waiting for host..."
+	else:
+		$StartGame.disabled = true
+		$StartGame.text = str(n)+"/"+str(len(Global.players_dict))+" ready"
+
+@rpc("any_peer", "call_local", "reliable")
+func send_ready_infos(id:int, laser_color: Color):
+	if Global.is_host:
+		Global.players_dict[id]["laser_color"] = laser_color
+		update_player_list.rpc(Global.players_dict)

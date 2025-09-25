@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf4mrrjcp7djo"]
+[gd_scene load_steps=6 format=3 uid="uid://cf4mrrjcp7djo"]
 
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_j8ywt"]
 [ext_resource type="Script" uid="uid://cnbr2tfe5l7om" path="res://scripts/online_lobby_menu.gd" id="1_vdcme"]
@@ -8,6 +8,8 @@
 font_names = PackedStringArray("ShangoGothic ☞")
 font_weight = 999
 subpixel_positioning = 0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_046sn"]
 
 [node name="OnlineLobbyMenu" type="Control"]
 layout_mode = 3
@@ -61,6 +63,21 @@ focus_mode = 0
 theme = ExtResource("1_j8ywt")
 text = "START"
 
+[node name="Ready" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7118056
+anchor_top = 0.70987654
+anchor_right = 0.8237847
+anchor_bottom = 0.7916667
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme = ExtResource("1_j8ywt")
+toggle_mode = true
+text = "READY"
+metadata/_edit_use_anchors_ = true
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
@@ -96,6 +113,32 @@ focus_mode = 0
 theme = ExtResource("3_bfe55")
 text = "COPY IP"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+anchor_left = 0.5789931
+anchor_top = 0.30555555
+anchor_right = 0.8394097
+anchor_bottom = 0.36728394
+offset_right = -260.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Laser color"
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_046sn")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Ready" to="." method="_on_ready_pressed"]
+[connection signal="toggled" from="Ready" to="." method="_on_ready_toggled"]
 [connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="CopyIP" to="." method="_on_copy_ip_pressed"]

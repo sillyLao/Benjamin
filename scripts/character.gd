@@ -7,6 +7,7 @@ var JUMP_VELOCITY = 7.5
 var bullet_scene = preload("res://scenes/Entities/bullet.tscn")
 var laser_scene = preload("res://scenes/Entities/laser_ray.tscn")
 var is_dead : bool = false
+var laser_color : Color = Color.WHITE
 
 func _enter_tree():
 	$Label3D.text = Global.players_dict[int(name)]["pseudo"]
@@ -18,6 +19,7 @@ func _ready():
 		$Sketchfab_Scene.hide()
 		$Label3D.hide()
 		$Camera3D.make_current()
+		laser_color = Global.players_dict[int(name)]["laser_color"]
 
 func _physics_process(delta):
 	var input_dir
@@ -53,7 +55,7 @@ func _input(event : InputEvent) -> void:
 			shoot()
 
 func shoot():
-	create_laser.rpc(get_laser_parameters())
+	create_laser.rpc(int(name), get_laser_parameters())
 	var hitscan = get_camera_collision()
 	if hitscan:
 		var collider : Node = hitscan.collider
@@ -85,11 +87,13 @@ func get_laser_parameters() -> Array:
 	return [ray_origin, ray_end, rot]
 
 @rpc("any_peer", "call_local", "reliable")
-func create_laser(parameters : Array):
+func create_laser(id: int, parameters: Array):
 	var laser : CSGCylinder3D = laser_scene.instantiate()
 	laser.position = (parameters[0]+parameters[1])/2
 	laser.rotation = parameters[2]
 	laser.height = parameters[0].distance_to(parameters[1])-0.5
+	laser.material.albedo_color = Global.players_dict[id]["laser_color"]
+	laser.material.emission = Global.players_dict[id]["laser_color"]
 	get_parent().add_child(laser)
 
 @rpc("any_peer", "call_remote", "reliable")

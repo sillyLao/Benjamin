@@ -43,12 +43,12 @@ func _peer_disconnected(id):
 func _server_disconnected():
 	if not Global.is_host:
 		match leave_reason:
-			"_":
+			"voluntary":
+				leave_reason = ""
+			_:
 				UIOverlay.spawn_notification({
 					"icon" : "res://icon.svg",
 					"text" : Global.players_dict[1]["pseudo"] + " closed the lobby.",
 					"timer" : 5
 				})
 				get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
-			"voluntary":
-				leave_reason = ""
