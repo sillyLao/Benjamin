@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf4mrrjcp7djo"]
+[gd_scene load_steps=7 format=3 uid="uid://cf4mrrjcp7djo"]
 
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_j8ywt"]
 [ext_resource type="Script" uid="uid://cnbr2tfe5l7om" path="res://scripts/online_lobby_menu.gd" id="1_vdcme"]
 [ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="3_bfe55"]
+[ext_resource type="Texture2D" uid="uid://bkxfexw80n62w" path="res://assets/ui/check.png" id="3_f1llj"]
 
 [sub_resource type="SystemFont" id="SystemFont_j8ywt"]
 font_names = PackedStringArray("ShangoGothic ☞")
@@ -78,7 +79,7 @@ toggle_mode = true
 text = "READY"
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PlayerList" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -88,8 +89,30 @@ anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="PlayerList"]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerList/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerList/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerList/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Androgyne"
+
+[node name="TextureRect" type="TextureRect" parent="PlayerList/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+texture = ExtResource("3_f1llj")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BACK" type="Button" parent="."]
 layout_mode = 1

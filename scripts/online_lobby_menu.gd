@@ -1,6 +1,7 @@
 extends Control
 
 var back_pressed : bool = false
+var checkmark = preload("res://assets/ui/check.png")
 
 func _ready():
 	$Options/BlockOptions.hide()
@@ -50,13 +51,26 @@ func create_infos() -> Dictionary:
 @rpc("any_peer", "call_local", "reliable")
 func update_player_list(players_dict : Dictionary):
 	Global.players_dict = players_dict.duplicate(true)
-	for child in $PanelContainer/VBoxContainer.get_children():
+	for child in $PlayerList/MarginContainer/VBoxContainer.get_children():
 		child.queue_free()
 	for key in players_dict:
-		var label = Label.new()
-		label.text = players_dict[key]["pseudo"]
-		$PanelContainer/VBoxContainer.add_child(label)
+		add_player(key)
 	update_ready()
+
+func add_player(id: int):
+	var label = Label.new()
+	label.text = Global.players_dict[id]["pseudo"]
+	var hbc = HBoxContainer.new()
+	hbc.custom_minimum_size.y = 25
+	var tx = TextureRect.new()
+	tx.texture = checkmark
+	tx.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	tx.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	tx.custom_minimum_size.x = 25
+	$PlayerList/MarginContainer/VBoxContainer.add_child(hbc)
+	hbc.add_child(label)
+	hbc.add_child(tx)
+	tx.visible = Global.players_dict[id]["ready"]
 
 @rpc("any_peer", "call_remote", "reliable")
 func send_infos(id:int, infos:Dictionary):

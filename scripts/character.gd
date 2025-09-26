@@ -55,7 +55,7 @@ func _physics_process(delta):
 			UIOverlay.ammos_progress.value = (1-($RegainAmmoTimer.time_left/$RegainAmmoTimer.wait_time))*100
 	
 		if not scale.x == 1:
-			scale = clamp(scale + Vector3.ONE*0.01*delta, Vector3.ONE*0.1, Vector3.ONE)
+			scale = clamp(scale + Vector3.ONE*0.01*delta, Vector3.ONE*0.2, Vector3.ONE)
 			if not input_dir and is_on_floor():
 				scale = clamp(scale + Vector3.ONE*0.03*delta, Vector3.ONE*0.2, Vector3.ONE)
 			UIOverlay.scale_bar.value = scale.x
@@ -140,6 +140,7 @@ func touched(from: int, to: int):
 		killed_someone.rpc_id(from, to, "shrink")
 		disappear.rpc(to)
 		node.get_node("RespawnTimer").start()
+		Global.add_kill_death.rpc(from, to)
 
 @rpc("any_peer", "call_remote", "reliable")
 func killed_someone(from: int, method: String):
@@ -224,6 +225,7 @@ func crush_player(from: int, to: int):
 	killed_someone.rpc_id(from, to, "crush")
 	disappear.rpc(to)
 	player.get_node("RespawnTimer").start()
+	Global.add_kill_death.rpc(from, to)
 
 func crushed_too_big():
 	is_dead = true
@@ -234,3 +236,4 @@ func crushed_too_big():
 	})
 	disappear.rpc(int(name))
 	get_node("RespawnTimer").start()
+	Global.add_kill_death.rpc(0, int(name))

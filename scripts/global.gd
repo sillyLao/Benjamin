@@ -6,7 +6,7 @@ var in_game : bool = false
 
 
 func _unhandled_key_input(event):
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("ui_cancel") and in_game:
 		if Global.paused:
 			Global.paused = false
 			UIOverlay.get_node("PauseMenu").hide()
@@ -27,6 +27,7 @@ var server_ip : String
 var is_host : bool
 var peer : ENetMultiplayerPeer
 var players_dict : Dictionary
+var players_score : Dictionary
 var player_count : int = 0
 var leave_reason : String
 
@@ -35,6 +36,10 @@ var leave_reason : String
 func launch_online_game():
 	multiplayer.peer_disconnected.connect(_peer_disconnected)
 	multiplayer.server_disconnected.connect(_server_disconnected)
+	for id in players_dict:
+		players_score[id] = {}
+		players_score[id]["kills"] = 0
+		players_score[id]["deaths"] = 0
 
 func _peer_disconnected(id):
 	if not id == 1:
@@ -58,3 +63,12 @@ func _server_disconnected():
 					"timer" : 5
 				})
 				get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
+
+@rpc("any_peer", "call_local", "reliable")
+func add_kill_death(kill: int, death: int):
+	if kill:
+		players_score[kill]["kills"] += 1
+		UIOverlay.tab.get_node(str(kill) + "/MarginContainer/HBoxContainer/Kills").text = str(players_score[kill]["kills"])
+	if death:
+		players_score[death]["deaths"] += 1
+		UIOverlay.tab.get_node(str(death) + "/MarginContainer/HBoxContainer/Deaths").text = str(players_score[death]["deaths"])

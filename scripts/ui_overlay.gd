@@ -4,6 +4,8 @@ extends Control
 @onready var ammos_progress = $"IG UI/Ammos/ProgressBar"
 @onready var scale_bar = $"IG UI/ScaleBar/ProgressBar"
 @onready var animation_player = $AnimationPlayer
+@onready var tab = $"IG UI/Tab/VBoxContainer"
+
 
 var notification_scene : PackedScene = preload("res://scenes/UI/notification.tscn")
 
@@ -18,7 +20,11 @@ func spawn_notification(infos : Dictionary) -> void:
 	notif.get_node("Timer").wait_time = infos["timer"]
 	$Notifications/VBoxContainer.add_child(notif)
 
-#func _input(event):
+func _unhandled_key_input(event):
+	if event.is_action_pressed("tab"):
+		$"IG UI/Tab".show()
+	if event.is_action_released("tab"):
+		$"IG UI/Tab".hide()
 	#if event.is_action_pressed("right"):
 		#UIOverlay.spawn_notification({
 			#"icon": "res://icon.svg",

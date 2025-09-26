@@ -4,11 +4,8 @@
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_l6cm7"]
 [ext_resource type="PackedScene" uid="uid://cdhs7h0r6xalb" path="res://scenes/Game/playground.tscn" id="2_wu84c"]
 [ext_resource type="PackedScene" uid="uid://cwvvrxi3msan5" path="res://scenes/Menu/online_menu.tscn" id="3_wu84c"]
+[ext_resource type="FontFile" uid="uid://ohss151a4oi5" path="res://assets/fonts/ShangoGothic-Bold.ttf" id="5_2itis"]
 [ext_resource type="Texture2D" uid="uid://usy41nfmek1x" path="res://assets/20250919_212530.jpg" id="5_4q1m5"]
-
-[sub_resource type="SystemFont" id="SystemFont_ekxnf"]
-font_names = PackedStringArray("ShangoGothic ☞")
-font_weight = 999
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -56,7 +53,7 @@ offset_left = -212.0
 offset_right = 212.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = SubResource("SystemFont_ekxnf")
+theme_override_fonts/font = ExtResource("5_2itis")
 theme_override_font_sizes/font_size = 86
 text = "BENJAMIN"
 

@@ -1,6 +1,7 @@
 extends Node3D
 
 var character_scene : PackedScene = preload("res://scenes/Entities/character.tscn")
+var tab_line_scene : PackedScene = preload("res://scenes/UI/tab_line.tscn")
 var available_respawns : Array
 
 # Called when the node enters the scene tree for the first time.
@@ -11,6 +12,7 @@ func _ready():
 			available_respawns.append(node)
 		spawn_players()
 		Global.launch_online_game.rpc()
+	create_tab()
 		
 
 func spawn_players():
@@ -23,6 +25,15 @@ func spawn_players():
 		new_player.name = str(id)
 		print(spawn_node)
 		add_child(new_player)
+
+func create_tab():
+	for id in Global.players_dict:
+		var tab_line = tab_line_scene.instantiate()
+		tab_line.get_node("MarginContainer/HBoxContainer/Name").text = Global.players_dict[id]["pseudo"]
+		tab_line.get_node("MarginContainer/HBoxContainer/LaserColor").color = Global.players_dict[id]["laser_color"]
+		tab_line.name = str(id)
+		UIOverlay.tab.add_child(tab_line)
+		UIOverlay.tab.add_child(HSeparator.new())
 
 func check_respawns():
 	available_respawns.clear()

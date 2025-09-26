@@ -1,8 +1,6 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://byhhmi0rfbtrt"]
 
-[sub_resource type="SystemFont" id="SystemFont_rjn5a"]
-font_names = PackedStringArray("ShangoGothic ☞")
-font_weight = 999
+[ext_resource type="FontFile" uid="uid://ohss151a4oi5" path="res://assets/fonts/ShangoGothic-Bold.ttf" id="1_ht4a7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht4a7"]
 content_margin_left = 10.0
@@ -57,7 +55,7 @@ shadow_offset = Vector2(-5, 5)
 
 [resource]
 Button/font_sizes/font_size = 32
-Button/fonts/font = SubResource("SystemFont_rjn5a")
+Button/fonts/font = ExtResource("1_ht4a7")
 Button/styles/hover = SubResource("StyleBoxFlat_ht4a7")
 Button/styles/normal = SubResource("StyleBoxFlat_r5bqt")
 Button/styles/pressed = SubResource("StyleBoxFlat_rjc7f")
