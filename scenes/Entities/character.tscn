@@ -29,7 +29,7 @@ height = 0.16708985
 radius = 0.4
 
 [node name="Character" type="CharacterBody3D"]
-collision_layer = 2
+collision_layer = 6
 script = ExtResource("1_lrhn5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -73,6 +73,7 @@ wait_time = 0.6
 one_shot = true
 
 [node name="FeetBox" type="Area3D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FeetBox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09354493, 0)

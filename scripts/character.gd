@@ -117,8 +117,9 @@ func create_laser(id: int, parameters: Array):
 	laser.position = (parameters[0]+parameters[1])/2
 	laser.rotation = parameters[2]
 	laser.height = parameters[0].distance_to(parameters[1])-0.5
-	laser.material.albedo_color = Global.players_dict[id]["laser_color"]
-	laser.material.emission = Global.players_dict[id]["laser_color"]
+	laser.material_override = laser.material.duplicate()
+	laser.material_override.albedo_color = Global.players_dict[id]["laser_color"]
+	laser.material_override.emission = Global.players_dict[id]["laser_color"]
 	get_parent().add_child(laser)
 
 @rpc("any_peer", "call_remote", "reliable")
