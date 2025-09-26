@@ -10,7 +10,7 @@ radius = 0.4
 height = 1.8975928
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uk1gh"]
-radius = 0.25
+radius = 0.3
 height = 1.8847852
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_uk1gh"]

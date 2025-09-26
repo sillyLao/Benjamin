@@ -1,7 +1,7 @@
 extends CSGCylinder3D
 
 func _ready():
-	material.emission_energy_multiplier = 16
+	material_override.emission_energy_multiplier = 16
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

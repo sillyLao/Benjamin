@@ -76,6 +76,7 @@ material = SubResource("StandardMaterial3D_ejtj7")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Map/Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.821, 52.437, -9.32)
+visible = false
 operation = 2
 radius = 50.0
 radial_segments = 32

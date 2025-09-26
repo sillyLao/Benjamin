@@ -2,9 +2,18 @@ extends CharacterBody3D
 
 @onready var camera = $Camera3D
 
-const SPEED = 10.0
-var JUMP_VELOCITY = 7.5
+const MIN_SCALE = 0.2
+const SCALE_REGEN = 0.01
+const BONUS_SCALE_REGEN = 0.03
+const SCALE_DAMAGE = 0.2
+var speed = 10.0
+const BASE_SPEED = 10.0
+const SPEED_MULT = 0.7
+var jump = 7.5
+const BASE_JUMP = 7.5
+const JUMP_MULT = 1.5
 const MAX_AMMOS = 10
+const LASER_LENGTH = 150
 var ammos = 2
 var bullet_scene = preload("res://scenes/Entities/bullet.tscn")
 var laser_scene = preload("res://scenes/Entities/laser_ray.tscn")
@@ -33,19 +42,20 @@ func _physics_process(delta):
 		if not Global.paused:
 			# Handle jump.
 			if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-				JUMP_VELOCITY = ((1-scale.x)*1.25+1)*7.5
-				velocity.y = JUMP_VELOCITY
+				jump = ((1-scale.x)*1/(1-MIN_SCALE)+JUMP_MULT)*BASE_JUMP
+				velocity.y = jump
 
 			# Get the input direction and handle the movement/deceleration.
 			# As good practice, you should replace UI actions with custom gameplay actions.
+			speed = ((scale.x-MIN_SCALE)*(1-MIN_SCALE)/SPEED_MULT+MIN_SCALE)*BASE_SPEED
 			input_dir = Input.get_vector("left", "right", "forward", "backward")
 			var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 			if direction:
-				velocity.x = direction.x * SPEED
-				velocity.z = direction.z * SPEED
+				velocity.x = direction.x * speed
+				velocity.z = direction.z * speed
 			else:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
-				velocity.z = move_toward(velocity.z, 0, SPEED)
+				velocity.x = move_toward(velocity.x, 0, speed)
+				velocity.z = move_toward(velocity.z, 0, speed)
 		# Add the gravity.
 		if not is_on_floor():
 			velocity += get_gravity() * delta
@@ -55,9 +65,9 @@ func _physics_process(delta):
 			UIOverlay.ammos_progress.value = (1-($RegainAmmoTimer.time_left/$RegainAmmoTimer.wait_time))*100
 	
 		if not scale.x == 1:
-			scale = clamp(scale + Vector3.ONE*0.01*delta, Vector3.ONE*0.2, Vector3.ONE)
+			scale = clamp(scale + Vector3.ONE*SCALE_REGEN*delta, Vector3.ONE*MIN_SCALE, Vector3.ONE)
 			if not input_dir and is_on_floor():
-				scale = clamp(scale + Vector3.ONE*0.03*delta, Vector3.ONE*0.2, Vector3.ONE)
+				scale = clamp(scale + Vector3.ONE*BONUS_SCALE_REGEN*delta, Vector3.ONE*MIN_SCALE, Vector3.ONE)
 			UIOverlay.scale_bar.value = scale.x
 			if scale.x > 0.6:
 				UIOverlay.scale_bar.self_modulate = Color(1.0, 0.7, 0.0).lerp(Color(0.0, 0.7, 0.0), (scale.x-0.6)*2.5)
@@ -91,7 +101,7 @@ func shoot():
 func get_camera_collision():
 	var centre = get_viewport().get_visible_rect().size/2
 	var ray_origin = camera.project_ray_origin(centre)
-	var ray_end = ray_origin + camera.project_ray_normal(centre)*50
+	var ray_end = ray_origin + camera.project_ray_normal(centre)*LASER_LENGTH
 	var new_intersection = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	new_intersection.collide_with_areas = true
 	new_intersection.collision_mask = 1
@@ -101,7 +111,7 @@ func get_camera_collision():
 func get_laser_parameters() -> Array:
 	var centre = get_viewport().get_visible_rect().size/2
 	var ray_origin = camera.project_ray_origin(centre)
-	var ray_end = ray_origin + camera.project_ray_normal(centre)*50
+	var ray_end = ray_origin + camera.project_ray_normal(centre)*LASER_LENGTH
 	var rot = Vector3(0, rotation.y+PI/2, camera.rotation.x-PI/2)
 	var new_intersection = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	new_intersection.collide_with_areas = true
@@ -116,7 +126,7 @@ func create_laser(id: int, parameters: Array):
 	var laser : CSGCylinder3D = laser_scene.instantiate()
 	laser.position = (parameters[0]+parameters[1])/2
 	laser.rotation = parameters[2]
-	laser.height = parameters[0].distance_to(parameters[1])-0.5
+	laser.height = parameters[0].distance_to(parameters[1])-0.2
 	laser.material_override = laser.material.duplicate()
 	laser.material_override.albedo_color = Global.players_dict[id]["laser_color"]
 	laser.material_override.emission = Global.players_dict[id]["laser_color"]
@@ -124,13 +134,8 @@ func create_laser(id: int, parameters: Array):
 
 @rpc("any_peer", "call_remote", "reliable")
 func touched(from: int, to: int):
-	#UIOverlay.spawn_notification({
-		#"icon" : "res://icon.svg",
-		#"text" : Global.players_dict[from]["pseudo"] + " vous a touché !!",
-		#"timer" : 1.5
-	#})
 	var node : CharacterBody3D = get_node("../"+str(to))
-	node.scale -= Vector3.ONE*0.2
+	node.scale -= Vector3.ONE*SCALE_DAMAGE
 	if node.scale.x <= 0.1:
 		node.is_dead = true
 		UIOverlay.spawn_notification({
@@ -210,7 +215,7 @@ func update_ammos():
 func _on_feet_box_area_entered(area):
 	if area.name == "PlayerArea":
 		var player : CharacterBody3D = area.get_parent()
-		if player.scale.x <= 0.3 and not player == self:
+		if player.scale.x <= scale.x/2.0 and not player == self:
 			print("["+str(multiplayer.get_unique_id())+"] " + str(player))
 			crush_player.rpc_id(int(player.name), int(name), int(player.name))
 
