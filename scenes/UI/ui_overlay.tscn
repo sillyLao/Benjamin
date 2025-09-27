@@ -156,6 +156,7 @@ grow_vertical = 0
 layout_mode = 2
 theme = ExtResource("3_g0uky")
 text = "10 / 10"
+horizontal_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="IG UI/Ammos"]
 custom_minimum_size = Vector2(0, 10)
@@ -183,8 +184,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -39.0
-offset_top = -256.0
-offset_bottom = 256.0
+offset_top = -175.0
+offset_bottom = 175.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_gvqy2")
@@ -204,8 +205,8 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -39.0
-offset_top = -256.0
-offset_bottom = 256.0
+offset_top = -175.0
+offset_bottom = 175.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_4wf6i")
@@ -218,10 +219,11 @@ show_percentage = false
 
 [node name="ColorRect" type="ColorRect" parent="IG UI/ScaleBar/ProgressBar"]
 layout_mode = 0
-offset_top = 435.0
-offset_right = 39.0
-offset_bottom = 441.0
+anchor_top = 0.8371429
+anchor_right = 1.0
+anchor_bottom = 0.8542857
 color = Color(0.7293979, 0.07846785, 0.07846785, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Tab" type="PanelContainer" parent="IG UI"]
 visible = false
@@ -271,6 +273,17 @@ offset_top = -2.0
 offset_right = 598.0
 offset_bottom = 21.0
 text = "Deaths"
+
+[node name="KillsList" type="VBoxContainer" parent="IG UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = 103.0
+grow_horizontal = 0
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false

@@ -16,15 +16,21 @@ func _ready():
 		
 
 func spawn_players():
+	var spawn_dict : Dictionary
 	for id in Global.players_dict:
 		var new_player : CharacterBody3D = character_scene.instantiate()
 		var n = randi_range(0, len(available_respawns)-1)
 		var spawn_node = available_respawns.pop_at(n)
-		new_player.position = spawn_node.position
-		new_player.rotation = spawn_node.rotation
+		spawn_dict[id] = {}
+		spawn_dict[id]["node"] = spawn_node.name
 		new_player.name = str(id)
-		print(spawn_node)
 		add_child(new_player)
+	assign_spawn_node.rpc(spawn_dict)
+
+@rpc("authority", "call_local", "reliable")
+func assign_spawn_node(dict: Dictionary):
+	get_node(str(multiplayer.get_unique_id())).spawn_node = get_node("Map/Respawns/"+dict[multiplayer.get_unique_id()]["node"])
+	get_node(str(multiplayer.get_unique_id())).position_spawn()
 
 func create_tab():
 	for id in Global.players_dict:

@@ -6,8 +6,15 @@ extends Control
 @onready var animation_player = $AnimationPlayer
 @onready var tab = $"IG UI/Tab/VBoxContainer"
 
+var kill_methods : Dictionary = {
+	"shrink" : "res://assets/ui/kill_shrink.png",
+	"crush" : "res://assets/ui/kill_crush.png",
+	"crushed_self" : "res://assets/ui/kill_crushed_self.png",
+}
+
 
 var notification_scene : PackedScene = preload("res://scenes/UI/notification.tscn")
+var kill_line_scene : PackedScene = preload("res://scenes/UI/kill_line.tscn")
 
 func _ready():
 	$"IG UI".hide()
@@ -19,6 +26,17 @@ func spawn_notification(infos : Dictionary) -> void:
 	notif.get_node("VBoxContainer/MarginContainer/HBoxContainer/RichTextLabel").text = infos["text"]
 	notif.get_node("Timer").wait_time = infos["timer"]
 	$Notifications/VBoxContainer.add_child(notif)
+
+@rpc("any_peer", "call_local", "reliable")
+func spawn_kill_line(killer: int, victim: int, method: String) -> void:
+	var kill_line = kill_line_scene.instantiate()
+	if killer:
+		kill_line.get_node("Killer").text = Global.players_dict[killer]["pseudo"]
+	else:
+		kill_line.get_node("Killer").text = ""
+	kill_line.get_node("Victim").text = Global.players_dict[victim]["pseudo"]
+	kill_line.get_node("TextureRect").texture = load(kill_methods[method])
+	$"IG UI/KillsList".add_child(kill_line)
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("tab"):

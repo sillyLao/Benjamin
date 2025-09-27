@@ -2,16 +2,17 @@ extends CharacterBody3D
 
 @onready var camera = $Camera3D
 
+var spawn_node : Node3D
 const MIN_SCALE = 0.2
 const SCALE_REGEN = 0.01
 const BONUS_SCALE_REGEN = 0.03
 const SCALE_DAMAGE = 0.2
 var speed = 10.0
 const BASE_SPEED = 10.0
-const SPEED_MULT = 0.7
+const SPEED_MULT = 0.6
 var jump = 7.5
 const BASE_JUMP = 7.5
-const JUMP_MULT = 1.5
+const JUMP_MULT = 1.7
 const MAX_AMMOS = 10
 const LASER_LENGTH = 150
 var ammos = 2
@@ -36,18 +37,24 @@ func _ready():
 		UIOverlay.scale_bar.value = 1
 		UIOverlay.scale_bar.self_modulate = Color(0.0, 0.7, 0.0)
 
+func position_spawn():
+	if spawn_node:
+		position = spawn_node.position
+		rotation = spawn_node.rotation
+	print("["+str(multiplayer.get_unique_id())+"] " + str(spawn_node))
+
 func _physics_process(delta):
 	var input_dir
 	if is_multiplayer_authority() and not is_dead:
 		if not Global.paused:
 			# Handle jump.
 			if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-				jump = ((1-scale.x)*1/(1-MIN_SCALE)+JUMP_MULT)*BASE_JUMP
+				jump = ((1-scale.x)/(1-MIN_SCALE)*(JUMP_MULT-1)+1)*BASE_JUMP
 				velocity.y = jump
 
 			# Get the input direction and handle the movement/deceleration.
 			# As good practice, you should replace UI actions with custom gameplay actions.
-			speed = ((scale.x-MIN_SCALE)*(1-MIN_SCALE)/SPEED_MULT+MIN_SCALE)*BASE_SPEED
+			speed = ((scale.x-MIN_SCALE)*(1-SPEED_MULT)/(1-MIN_SCALE)+SPEED_MULT)*BASE_SPEED
 			input_dir = Input.get_vector("left", "right", "forward", "backward")
 			var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 			if direction:
@@ -64,7 +71,7 @@ func _physics_process(delta):
 		if not ammos == MAX_AMMOS:
 			UIOverlay.ammos_progress.value = (1-($RegainAmmoTimer.time_left/$RegainAmmoTimer.wait_time))*100
 	
-		if not scale.x == 1:
+		if not scale.x > 0.99:
 			scale = clamp(scale + Vector3.ONE*SCALE_REGEN*delta, Vector3.ONE*MIN_SCALE, Vector3.ONE)
 			if not input_dir and is_on_floor():
 				scale = clamp(scale + Vector3.ONE*BONUS_SCALE_REGEN*delta, Vector3.ONE*MIN_SCALE, Vector3.ONE)
@@ -77,6 +84,7 @@ func _physics_process(delta):
 				UIOverlay.scale_bar.self_modulate = Color(0.8, 0.0, 0.0)
 			if is_on_ceiling() and is_on_floor():
 				crushed_too_big()
+				print(scale.x)
 
 func _input(event : InputEvent) -> void:
 	if is_multiplayer_authority() and not Global.paused and not is_dead:
@@ -161,6 +169,8 @@ func killed_someone(from: int, method: String):
 		"text" : text,
 		"timer" : 3
 	})
+	UIOverlay.spawn_kill_line.rpc(int(name), from, method)
+
 
 @rpc("any_peer", "call_local", "reliable")
 func disappear(id : int): # is killed
@@ -213,11 +223,11 @@ func update_ammos():
 	UIOverlay.ammos.text = str(ammos) + " / " + str(MAX_AMMOS)
 
 func _on_feet_box_area_entered(area):
-	if area.name == "PlayerArea":
-		var player : CharacterBody3D = area.get_parent()
-		if player.scale.x <= scale.x/2.0 and not player == self:
-			print("["+str(multiplayer.get_unique_id())+"] " + str(player))
-			crush_player.rpc_id(int(player.name), int(name), int(player.name))
+	if is_multiplayer_authority():
+		if area.name == "PlayerArea":
+			var player : CharacterBody3D = area.get_parent()
+			if player.scale.x <= scale.x/2.0 and not player.name == name:
+				crush_player.rpc_id(int(player.name), int(name), int(player.name))
 
 @rpc("any_peer", "call_remote", "reliable")
 func crush_player(from: int, to: int):
@@ -243,3 +253,4 @@ func crushed_too_big():
 	disappear.rpc(int(name))
 	get_node("RespawnTimer").start()
 	Global.add_kill_death.rpc(0, int(name))
+	UIOverlay.spawn_kill_line.rpc(0, int(name), "crushed_self")
