@@ -11,6 +11,9 @@ func _ready():
 	for child in UIOverlay.tab.get_children():
 		child.queue_free()
 	Global.players_score.clear()
+	UIOverlay.get_node("MenuMusic").play()
+	if randf() <= 0.01:
+		UIOverlay.get_node("MenuMusic").pitch_scale = 1.2
 
 func _on_solo_pressed():
 	get_tree().change_scene_to_packed(solo)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://denv2whxt2gd3"]
+[gd_scene load_steps=16 format=3 uid="uid://denv2whxt2gd3"]
 
 [ext_resource type="Script" uid="uid://cvhxm20chx2nu" path="res://scripts/ui_overlay.gd" id="1_3i566"]
 [ext_resource type="Texture2D" uid="uid://lgkupfsrrvo2" path="res://assets/ui/cursor.png" id="2_rtbcl"]
 [ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="3_aisqu"]
 [ext_resource type="Theme" uid="uid://cs56nwbxtnkb0" path="res://themes/ig_ammos.tres" id="3_g0uky"]
+[ext_resource type="AudioStream" uid="uid://c07ycv6o2j4hk" path="res://assets/audio/Gymnopedie No. 1 - Erik Satie.mp3" id="5_jaqk0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0uky"]
 bg_color = Color(0, 0, 0, 0.20784314)
@@ -388,6 +389,12 @@ theme_override_constants/separation = 1
 libraries = {
 &"": SubResource("AnimationLibrary_gvqy2")
 }
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_jaqk0")
+autoplay = true
+stream_paused = true
+parameters/looping = true
 
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Options" to="." method="_on_options_pressed"]

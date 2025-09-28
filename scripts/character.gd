@@ -59,14 +59,27 @@ func _physics_process(delta):
 			input_dir = Input.get_vector("left", "right", "forward", "backward")
 			var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 			if direction:
-				velocity.x = direction.x * speed
-				velocity.z = direction.z * speed
+				if is_on_floor():
+					velocity.x = lerpf(velocity.x, direction.x * speed, 0.2) 
+					velocity.z = lerpf(velocity.z, direction.z * speed, 0.2)
+				else:
+					velocity.x = lerpf(velocity.x, direction.x * speed, 0.03)
+					velocity.z = lerpf(velocity.z, direction.z * speed, 0.03)
 			else:
-				velocity.x = move_toward(velocity.x, 0, speed)
-				velocity.z = move_toward(velocity.z, 0, speed)
+				if is_on_floor():
+					velocity.x = move_toward(velocity.x, 0, BASE_SPEED*delta*10)
+					velocity.z = move_toward(velocity.z, 0, BASE_SPEED*delta*10)
+				else:
+					velocity.x = move_toward(velocity.x, 0, BASE_SPEED*delta)
+					velocity.z = move_toward(velocity.z, 0, BASE_SPEED*delta)
 		# Add the gravity.
+		var fall = 1
 		if not is_on_floor():
-			velocity += get_gravity() * delta
+			if velocity.y < 0:
+				fall = 1.5
+			else:
+				fall = 1
+			velocity += get_gravity() * delta * fall
 		move_and_slide()
 		
 		if not ammos == MAX_AMMOS:
