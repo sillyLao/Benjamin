@@ -157,7 +157,7 @@ func create_laser(id: int, parameters: Array):
 @rpc("any_peer", "call_remote", "reliable")
 func touched(from: int, to: int):
 	var node : CharacterBody3D = get_node("../"+str(to))
-	var pos = node.position
+	var pos = get_node("../"+str(from)).position
 	UIOverlay.spawn_hit_pos_indicator(pos)
 	node.scale -= Vector3.ONE*SCALE_DAMAGE
 	if node.scale.x <= 0.1:

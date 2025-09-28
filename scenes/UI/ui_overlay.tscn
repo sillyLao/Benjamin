@@ -393,7 +393,6 @@ libraries = {
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_jaqk0")
 autoplay = true
-stream_paused = true
 parameters/looping = true
 
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]

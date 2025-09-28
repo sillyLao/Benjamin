@@ -47,8 +47,16 @@ func spawn_hit_pos_indicator(pos: Vector3):
 func _physics_process(_delta):
 	if $"IG UI/HitPos".get_children():
 		for child in $"IG UI/HitPos".get_children():
-			child.rotation = Vector2(self_player.position.x, self_player.position.z).angle_to_point(Vector2(child.pos.x, child.pos.z))
-			print(Vector2(self_player.position.x, self_player.position.z).angle_to_point(Vector2(child.pos.x, child.pos.z)))
+			#child.rotation = Vector2(self_player.position.x, self_player.position.z).angle_to_point(Vector2(child.pos.x, child.pos.z)))
+			var cam_direction = self_player.camera.get_global_transform().basis.z
+			var cam_vect = Vector2(cam_direction.x, -cam_direction.z).normalized()
+			var shoot_vect = Vector2((-child.pos.x+self_player.global_position.x),(child.pos.z-self_player.global_position.z)).normalized()
+			var angle = cam_vect.angle_to(shoot_vect)
+			child.rotation = -angle
+			print(child.rotation)
+			print(Vector2(-child.pos.x, child.pos.z))#.normalized())
+			print(Vector2(-self_player.global_position.x, self_player.global_position.z))#.normalized())
+
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("tab"):
