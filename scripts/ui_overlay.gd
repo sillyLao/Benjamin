@@ -11,10 +11,11 @@ var kill_methods : Dictionary = {
 	"crush" : "res://assets/ui/kill_crush.png",
 	"crushed_self" : "res://assets/ui/kill_crushed_self.png",
 }
-
+var self_player : CharacterBody3D
 
 var notification_scene : PackedScene = preload("res://scenes/UI/notification.tscn")
 var kill_line_scene : PackedScene = preload("res://scenes/UI/kill_line.tscn")
+var hit_pos_indicator_scene : PackedScene = preload("res://scenes/UI/hit_position_indicator.tscn")
 
 func _ready():
 	$"IG UI".hide()
@@ -37,6 +38,17 @@ func spawn_kill_line(killer: int, victim: int, method: String) -> void:
 	kill_line.get_node("Victim").text = Global.players_dict[victim]["pseudo"]
 	kill_line.get_node("TextureRect").texture = load(kill_methods[method])
 	$"IG UI/KillsList".add_child(kill_line)
+
+func spawn_hit_pos_indicator(pos: Vector3):
+	var hpi = hit_pos_indicator_scene.instantiate()
+	hpi.pos = pos
+	$"IG UI/HitPos".add_child(hpi)
+
+func _physics_process(_delta):
+	if $"IG UI/HitPos".get_children():
+		for child in $"IG UI/HitPos".get_children():
+			child.rotation = Vector2(self_player.position.x, self_player.position.z).angle_to_point(Vector2(child.pos.x, child.pos.z))
+			print(Vector2(self_player.position.x, self_player.position.z).angle_to_point(Vector2(child.pos.x, child.pos.z)))
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("tab"):

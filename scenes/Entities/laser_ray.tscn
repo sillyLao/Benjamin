@@ -3,16 +3,19 @@
 [ext_resource type="Script" uid="uid://27pqe8ml3iwq" path="res://scripts/laser_ray.gd" id="1_76fjv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc4jr"]
-albedo_color = Color(1, 0, 1, 1)
-emission_enabled = true
-emission = Color(1, 0, 1, 1)
-emission_energy_multiplier = 16.0
+shading_mode = 0
+albedo_color = Color(0.3078494, 0, 1, 1)
 
 [node name="LaserRay" type="CSGCylinder3D"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
 layers = 2
-transparency = 0.4
+transparency = 0.6
 radius = 0.03
 sides = 3
 material = SubResource("StandardMaterial3D_cc4jr")
 script = ExtResource("1_76fjv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true

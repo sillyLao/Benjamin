@@ -1,4 +1,6 @@
-extends HBoxContainer
+extends Control
+
+var pos : Vector3
 
 func _process(delta):
 	if not $Timer.time_left:

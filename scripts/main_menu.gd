@@ -5,7 +5,12 @@ extends Control
 
 func _ready():
 	UIOverlay.get_node("IG UI").hide()
+	UIOverlay.get_node("PauseMenu").hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Global.players_dict.clear()
+	for child in UIOverlay.tab.get_children():
+		child.queue_free()
+	Global.players_score.clear()
 
 func _on_solo_pressed():
 	get_tree().change_scene_to_packed(solo)
