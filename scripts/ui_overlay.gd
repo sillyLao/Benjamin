@@ -5,6 +5,7 @@ extends Control
 @onready var scale_bar = $"IG UI/ScaleBar/ProgressBar"
 @onready var animation_player = $AnimationPlayer
 @onready var tab = $"IG UI/Tab/VBoxContainer"
+@onready var menu_music = $MenuMusic
 
 var kill_methods : Dictionary = {
 	"shrink" : "res://assets/ui/kill_shrink.png",
@@ -39,9 +40,10 @@ func spawn_kill_line(killer: int, victim: int, method: String) -> void:
 	kill_line.get_node("TextureRect").texture = load(kill_methods[method])
 	$"IG UI/KillsList".add_child(kill_line)
 
-func spawn_hit_pos_indicator(pos: Vector3):
+func spawn_hit_pos_indicator(pos: Vector3, color: Color):
 	var hpi = hit_pos_indicator_scene.instantiate()
 	hpi.pos = pos
+	hpi.modulate = color
 	$"IG UI/HitPos".add_child(hpi)
 
 func _physics_process(_delta):

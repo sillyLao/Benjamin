@@ -158,7 +158,7 @@ func create_laser(id: int, parameters: Array):
 func touched(from: int, to: int):
 	var node : CharacterBody3D = get_node("../"+str(to))
 	var pos = get_node("../"+str(from)).position
-	UIOverlay.spawn_hit_pos_indicator(pos)
+	UIOverlay.spawn_hit_pos_indicator(pos, Global.players_dict[from]["laser_color"])
 	node.scale -= Vector3.ONE*SCALE_DAMAGE
 	if node.scale.x <= 0.1:
 		node.is_dead = true

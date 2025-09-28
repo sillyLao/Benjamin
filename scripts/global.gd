@@ -40,6 +40,7 @@ func launch_online_game():
 		players_score[id] = {}
 		players_score[id]["kills"] = 0
 		players_score[id]["deaths"] = 0
+	UIOverlay.menu_music.stop()
 
 func _peer_disconnected(id):
 	if not id == 1:
