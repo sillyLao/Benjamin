@@ -123,11 +123,12 @@ theme_override_font_sizes/font_size = 26
 text = "Pseudo"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
+[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
+max_length = 25
 
 [node name="IP" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -139,11 +140,12 @@ theme_override_font_sizes/font_size = 26
 text = "Room Name"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
+[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
+max_length = 25
 
 [node name="PORT" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -155,13 +157,15 @@ theme_override_font_sizes/font_size = 26
 text = "PORT"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
+[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
+max_length = 25
 
 [node name="MODE" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/MODE"]
@@ -233,11 +237,12 @@ theme_override_font_sizes/font_size = 26
 text = "Pseudo"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
+[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
+max_length = 25
 
 [node name="IP" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -249,11 +254,12 @@ theme_override_font_sizes/font_size = 26
 text = "IP"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
+[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
+max_length = 25
 
 [node name="PORT" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -265,11 +271,12 @@ theme_override_font_sizes/font_size = 26
 text = "PORT"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="TextEdit" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
+[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
+max_length = 25
 
 [node name="MODE" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2

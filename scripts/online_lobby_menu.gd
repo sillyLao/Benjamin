@@ -6,6 +6,7 @@ var checkmark = preload("res://assets/ui/check.png")
 func _ready():
 	$Options/BlockOptions.hide()
 	update_ready()
+	send_game_settings(Global.game_settings)
 	if Global.is_host: # Server
 		if Global.new_lobby:
 			multiplayer.peer_connected.connect(_peer_connected)
@@ -16,6 +17,7 @@ func _ready():
 		update_player_list.rpc(Global.players_dict)
 	
 	else: # Client
+		$GameSettings/List/VBoxContainer/Edit.hide()
 		if Global.new_lobby:
 			multiplayer.connected_to_server.connect(_connected_to_server)
 			multiplayer.server_disconnected.connect(_server_disconnected)
@@ -143,3 +145,39 @@ func send_ready_infos(id:int, laser_color: Color):
 	if Global.is_host:
 		Global.players_dict[id]["laser_color"] = laser_color
 		update_player_list.rpc(Global.players_dict)
+
+@rpc("authority", "call_local", "reliable")
+func send_game_settings(game_settings: Dictionary):
+	Global.game_settings = game_settings.duplicate()
+	for key in game_settings:
+		$GameSettings/List/VBoxContainer.get_node(key).get_node("Label").text = str(game_settings[key])
+	if game_settings["Teams"] == "No teams":
+		$GameSettings/List/VBoxContainer/Teams.hide()
+	match game_settings["WinCon"]:
+		"Time":
+			$GameSettings/List/VBoxContainer/Score.hide()
+			$GameSettings/List/VBoxContainer/Time.show()
+		"Score":
+			$GameSettings/List/VBoxContainer/Score.show()
+			$GameSettings/List/VBoxContainer/Time.hide()
+
+
+func _on_edit_pressed():
+	$GameSettings/List.hide()
+	$GameSettings/Edit.show()
+
+func _on_ok_pressed():
+	$GameSettings/List.show()
+	$GameSettings/Edit.hide()
+	var settings1 := ["GameMode", "Format", "Teams", "WinCon", "Map"]
+	var game_settings := {}
+	for key in settings1:
+		var ob : OptionButton = $GameSettings/Edit/VBoxContainer.get_node(key +"/OptionButton")
+		game_settings[key] = ob.get_item_text(ob.selected)
+	if game_settings["Format"] == "Free for all":
+		game_settings["Teams"] = "No teams"
+	var settings2 := ["Time", "Score"]
+	for key in settings2:
+		var le : LineEdit = $GameSettings/Edit/VBoxContainer.get_node(key +"/LineEdit")
+		game_settings[key] = int(le.text)
+	send_game_settings.rpc(game_settings)

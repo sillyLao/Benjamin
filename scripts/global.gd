@@ -32,6 +32,15 @@ var players_score : Dictionary
 var player_count : int = 0
 var leave_reason : String
 var current_map : Node3D
+var game_settings : Dictionary = {
+	"GameMode" : "Battlefield",
+	"Format" : "Free for all",
+	"Teams" : "No teams",
+	"WinCon" : "Time",
+	"Time" : 300,
+	"Score" : 10,
+	"Map" : "MapTest",
+}
 
 
 @rpc("authority", "call_local", "reliable")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf4mrrjcp7djo"]
+[gd_scene load_steps=10 format=3 uid="uid://cf4mrrjcp7djo"]
 
 [ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_j8ywt"]
 [ext_resource type="Script" uid="uid://cnbr2tfe5l7om" path="res://scripts/online_lobby_menu.gd" id="1_vdcme"]
@@ -11,6 +11,13 @@ font_weight = 999
 subpixel_positioning = 0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_046sn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1llj"]
+bg_color = Color(1, 1, 1, 0.066)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1llj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_acy60"]
 
 [node name="OnlineLobbyMenu" type="Control"]
 layout_mode = 3
@@ -49,16 +56,16 @@ text = "ONLINE"
 
 [node name="StartGame" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = -53.0
-offset_right = 58.0
-offset_bottom = -35.0
-grow_horizontal = 2
+offset_left = -173.0
+offset_top = -90.0
+offset_right = -57.0
+offset_bottom = -37.0
+grow_horizontal = 0
 grow_vertical = 0
 focus_mode = 0
 theme = ExtResource("1_j8ywt")
@@ -66,28 +73,33 @@ text = "START"
 
 [node name="Ready" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.7118056
-anchor_top = 0.70987654
-anchor_right = 0.8237847
-anchor_bottom = 0.7916667
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.5
+offset_top = -93.0
+offset_right = 64.5
+offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 focus_mode = 0
 theme = ExtResource("1_j8ywt")
 toggle_mode = true
 text = "READY"
-metadata/_edit_use_anchors_ = true
 
 [node name="PlayerList" type="PanelContainer" parent="."]
+clip_contents = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.1
+anchor_left = 0.07118055
 anchor_top = 0.25
-anchor_right = 0.45
+anchor_right = 0.36979166
 anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="PlayerList"]
 layout_mode = 2
@@ -138,25 +150,22 @@ text = "COPY IP"
 
 [node name="Options" type="Control" parent="."]
 layout_mode = 1
-anchor_left = 0.5494792
-anchor_top = 0.25154322
-anchor_right = 0.8810764
-anchor_bottom = 0.6898148
+anchor_left = 0.050347224
+anchor_top = 0.83950615
+anchor_right = 0.38194445
+anchor_bottom = 0.95987654
 offset_top = -1.5258789e-05
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Options"]
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -150.0
-offset_top = 8.0
-offset_right = 150.0
-offset_bottom = 58.0
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="Options/HBoxContainer"]
@@ -182,12 +191,374 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.40300003)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="GameSettings" type="PanelContainer" parent="."]
 layout_mode = 0
-offset_right = 300.0
-offset_bottom = 50.0
+anchor_left = 0.5208333
+anchor_top = 0.27160493
+anchor_right = 0.828125
+anchor_bottom = 0.77006173
+offset_top = 1.5258789e-05
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1llj")
+metadata/_edit_use_anchors_ = true
+
+[node name="List" type="MarginContainer" parent="GameSettings"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettings/List"]
+layout_mode = 2
+
+[node name="GameMode" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/GameMode"]
+layout_mode = 2
+text = "Game mode : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/GameMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/GameMode"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Battlefield"
+
+[node name="Format" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Format"]
+layout_mode = 2
+text = "Format : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Format"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Format"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Free for all"
+
+[node name="Teams" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Teams"]
+layout_mode = 2
+text = "Teams : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Teams"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Teams"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Free teams"
+
+[node name="WinCon" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/WinCon"]
+layout_mode = 2
+text = "Game stops with : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/WinCon"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/WinCon"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Time"
+
+[node name="Time" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Time"]
+layout_mode = 2
+text = "Time limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Time"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Time"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "300"
+
+[node name="Score" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Score"]
+layout_mode = 2
+text = "Score limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Score"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "10"
+
+[node name="Map" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Map"]
+layout_mode = 2
+text = "Map : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Map"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Map"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "MapTest"
+
+[node name="KitRestrictions" type="HBoxContainer" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/KitRestrictions"]
+layout_mode = 2
+text = "Kit Restrictions : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/KitRestrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/KitRestrictions"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "No restrictions"
+
+[node name="HSeparator" type="HSeparator" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_acy60")
+
+[node name="Edit" type="Button" parent="GameSettings/List/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_bfe55")
+text = "Edit"
+
+[node name="Edit" type="MarginContainer" parent="GameSettings"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettings/Edit"]
+layout_mode = 2
+
+[node name="GameMode" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/GameMode"]
+layout_mode = 2
+text = "Game mode : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/GameMode"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/GameMode"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Battlefield"
+popup/item_0/id = 0
+popup/item_1/text = "Deathmatch"
+popup/item_1/id = 1
+
+[node name="Format" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Format"]
+layout_mode = 2
+text = "Format : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Format"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/Format"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Free for all"
+popup/item_0/id = 0
+popup/item_1/text = "Teams"
+popup/item_1/id = 1
+
+[node name="Teams" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Teams"]
+layout_mode = 2
+text = "Teams : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Teams"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/Teams"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "Free teams"
+popup/item_0/id = 0
+popup/item_1/text = "Two sides"
+popup/item_1/id = 1
+popup/item_2/text = "Random duos"
+popup/item_2/id = 2
+
+[node name="WinCon" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/WinCon"]
+layout_mode = 2
+text = "Game stops with : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/WinCon"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/WinCon"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Time"
+popup/item_0/id = 0
+popup/item_1/text = "Score"
+popup/item_1/id = 1
+
+[node name="Time" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Time"]
+layout_mode = 2
+text = "Time Limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Time"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="LineEdit" type="LineEdit" parent="GameSettings/Edit/VBoxContainer/Time"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "300"
+
+[node name="Score" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Score"]
+layout_mode = 2
+text = "Time Limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Score"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="LineEdit" type="LineEdit" parent="GameSettings/Edit/VBoxContainer/Score"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "10"
+
+[node name="Map" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Map"]
+layout_mode = 2
+text = "Map : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Map"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/Map"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 1
+popup/item_0/text = "MapTest"
+popup/item_0/id = 0
+
+[node name="KitRestrictions" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/KitRestrictions"]
+layout_mode = 2
+text = "Kit Restrictions : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/KitRestrictions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="MenuButton" type="MenuButton" parent="GameSettings/Edit/VBoxContainer/KitRestrictions"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "No Restrictions"
+item_count = 1
+popup/item_0/text = "No restrictions"
+popup/item_0/id = 0
+
+[node name="HSeparator" type="HSeparator" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_acy60")
+
+[node name="OK" type="Button" parent="GameSettings/Edit/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_bfe55")
+text = "OK"
 
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="toggled" from="Ready" to="." method="_on_ready_toggled"]
 [connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="CopyIP" to="." method="_on_copy_ip_pressed"]
+[connection signal="pressed" from="GameSettings/List/VBoxContainer/Edit" to="." method="_on_edit_pressed"]
+[connection signal="pressed" from="GameSettings/Edit/VBoxContainer/OK" to="." method="_on_ok_pressed"]
