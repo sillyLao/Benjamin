@@ -86,3 +86,6 @@ func add_kill_death(kill: int, death: int):
 	if death:
 		players_score[death]["deaths"] += 1
 		UIOverlay.tab.get_node(str(death) + "/MarginContainer/HBoxContainer/Deaths").text = str(players_score[death]["deaths"])
+	if game_settings["WinCon"] == "Score":
+		if players_score[kill]["kills"] >= game_settings["Score"]:
+			UIOverlay.end_game()

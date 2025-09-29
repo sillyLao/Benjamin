@@ -107,7 +107,8 @@ func _on_quit_pressed():
 		get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
 
 func _on_timer_timeout():
-	end_game()
+	if Global.game_settings["WinCon"] == "Time":
+		end_game()
 
 func end_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -181,7 +182,6 @@ func start_game():
 	menu_music.stop()
 	$GameEnded.hide()
 	$"IG UI".show()
-	game_timer.wait_time = 300
 	game_timer.start()
 	if Global.is_host:
 		if Global.current_map:

@@ -7,6 +7,10 @@ func _ready():
 	$Options/BlockOptions.hide()
 	update_ready()
 	send_game_settings(Global.game_settings)
+	if Global.players_dict:
+		if Global.players_dict[multiplayer.get_unique_id()]["ready"]:
+			$Ready.button_pressed = true
+			$Options/BlockOptions.visible = true
 	if Global.is_host: # Server
 		if Global.new_lobby:
 			multiplayer.peer_connected.connect(_peer_connected)
@@ -157,9 +161,12 @@ func send_game_settings(game_settings: Dictionary):
 		"Time":
 			$GameSettings/List/VBoxContainer/Score.hide()
 			$GameSettings/List/VBoxContainer/Time.show()
+			UIOverlay.game_timer.wait_time = game_settings["Time"]
+			UIOverlay.game_timer.get_parent().show()
 		"Score":
 			$GameSettings/List/VBoxContainer/Score.show()
 			$GameSettings/List/VBoxContainer/Time.hide()
+			UIOverlay.game_timer.get_parent().hide()
 
 
 func _on_edit_pressed():
