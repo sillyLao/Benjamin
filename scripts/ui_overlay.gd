@@ -180,9 +180,14 @@ func start_game():
 	Global.paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	menu_music.stop()
+	$GameMusic.play()
 	$GameEnded.hide()
 	$"IG UI".show()
 	game_timer.start()
 	if Global.is_host:
 		if Global.current_map:
 			Global.current_map.assign_spawn({})
+
+func _on_game_music_finished():
+	if Global.in_game:
+		$GameMusic.play()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b13puwepwals0"
+path="res://.godot/imported/IMITATE_U.mp3-29b117efec96375e73032ef1199bf2c4.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/online musics/IMITATE_U.mp3"
+dest_files=["res://.godot/imported/IMITATE_U.mp3-29b117efec96375e73032ef1199bf2c4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

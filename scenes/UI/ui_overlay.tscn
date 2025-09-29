@@ -1,10 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://denv2whxt2gd3"]
+[gd_scene load_steps=24 format=3 uid="uid://denv2whxt2gd3"]
 
 [ext_resource type="Script" uid="uid://cvhxm20chx2nu" path="res://scripts/ui_overlay.gd" id="1_3i566"]
 [ext_resource type="Texture2D" uid="uid://lgkupfsrrvo2" path="res://assets/ui/cursor.png" id="2_rtbcl"]
 [ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="3_aisqu"]
 [ext_resource type="Theme" uid="uid://cs56nwbxtnkb0" path="res://themes/ig_ammos.tres" id="3_g0uky"]
 [ext_resource type="AudioStream" uid="uid://c07ycv6o2j4hk" path="res://assets/audio/Gymnopedie No. 1 - Erik Satie.mp3" id="5_jaqk0"]
+[ext_resource type="AudioStream" uid="uid://dgk6jk4cqdisx" path="res://assets/audio/online musics/imagine_if_gaia_woufeuse_got_a_low_taper_fade.mp3" id="6_2lol6"]
+[ext_resource type="AudioStream" uid="uid://b13puwepwals0" path="res://assets/audio/online musics/IMITATE_U.mp3" id="7_dghs7"]
+[ext_resource type="AudioStream" uid="uid://d0pujsbfs7fl2" path="res://assets/audio/online musics/LES_____DE_CITÉ.mp3" id="8_2s84o"]
+[ext_resource type="AudioStream" uid="uid://0n7exd3idrf4" path="res://assets/audio/online musics/STUPEFIANTE.mp3" id="9_6pmgl"]
+[ext_resource type="AudioStream" uid="uid://dmf0qxrtrfvsm" path="res://assets/audio/online musics/STUPEFIANTE_but_in_english_awesome.mp3" id="10_7phbs"]
+[ext_resource type="AudioStream" uid="uid://be6srhjnhvdwo" path="res://assets/audio/online musics/SUICIDAL.mp3" id="11_rmv56"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0uky"]
 bg_color = Color(0, 0, 0, 0.20784314)
@@ -112,6 +118,17 @@ _data = {
 &"RESET": SubResource("Animation_jaqk0"),
 &"crosshair_hit": SubResource("Animation_g0uky")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tyfjk"]
+streams_count = 6
+stream_0/stream = ExtResource("6_2lol6")
+stream_1/stream = ExtResource("7_dghs7")
+stream_2/stream = ExtResource("8_2s84o")
+stream_3/stream = ExtResource("9_6pmgl")
+stream_3/weight = 0.98
+stream_4/stream = ExtResource("10_7phbs")
+stream_4/weight = 0.02
+stream_5/stream = ExtResource("11_rmv56")
 
 [node name="UIOverlay" type="Control"]
 z_index = 2
@@ -486,8 +503,13 @@ libraries = {
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_jaqk0")
+volume_db = -10.0
 autoplay = true
 parameters/looping = true
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_tyfjk")
+volume_db = -15.0
 
 [connection signal="timeout" from="IG UI/Time/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
@@ -495,3 +517,4 @@ parameters/looping = true
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="GameEnded/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="GameEnded/VBoxContainer/Lobby" to="." method="_on_lobby_pressed"]
+[connection signal="finished" from="GameMusic" to="." method="_on_game_music_finished"]
