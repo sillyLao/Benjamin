@@ -1,6 +1,23 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://byhhmi0rfbtrt"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://byhhmi0rfbtrt"]
 
 [ext_resource type="FontFile" uid="uid://ohss151a4oi5" path="res://assets/fonts/ShangoGothic-Bold.ttf" id="1_ht4a7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mp587"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.15234375, 0.15234375, 0.15234375, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.12591085, 0.12591085, 0.12591082, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.10747976, 0.10747973, 0.10747973, 0.6)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ht4a7"]
 content_margin_left = 10.0
@@ -56,6 +73,7 @@ shadow_offset = Vector2(-5, 5)
 [resource]
 Button/font_sizes/font_size = 32
 Button/fonts/font = ExtResource("1_ht4a7")
+Button/styles/disabled = SubResource("StyleBoxFlat_mp587")
 Button/styles/hover = SubResource("StyleBoxFlat_ht4a7")
 Button/styles/normal = SubResource("StyleBoxFlat_r5bqt")
 Button/styles/pressed = SubResource("StyleBoxFlat_rjc7f")

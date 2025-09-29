@@ -55,6 +55,7 @@ func connected(type : String):
 	multiplayer.multiplayer_peer = peer
 	Global.pseudo = get_node(type+"Panel/MarginContainer/VBoxContainer/Pseudo/TextEdit").text
 	Global.peer = peer
+	Global.new_lobby = true
 	match type:
 		"Host":
 			Global.server_ip = host_ip

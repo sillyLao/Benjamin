@@ -22,6 +22,7 @@ func switch_to_game():
 
 signal player_quits(id: int)
 
+var new_lobby : bool
 var pseudo : String
 var server_ip : String
 var is_host : bool
@@ -30,17 +31,20 @@ var players_dict : Dictionary
 var players_score : Dictionary
 var player_count : int = 0
 var leave_reason : String
+var current_map : Node3D
 
 
 @rpc("authority", "call_local", "reliable")
 func launch_online_game():
-	multiplayer.peer_disconnected.connect(_peer_disconnected)
-	multiplayer.server_disconnected.connect(_server_disconnected)
+	if new_lobby:
+		multiplayer.peer_disconnected.connect(_peer_disconnected)
+		multiplayer.server_disconnected.connect(_server_disconnected)
+	players_score.clear()
 	for id in players_dict:
 		players_score[id] = {}
 		players_score[id]["kills"] = 0
 		players_score[id]["deaths"] = 0
-	UIOverlay.menu_music.stop()
+	UIOverlay.start_game()
 
 func _peer_disconnected(id):
 	if not id == 1:

@@ -7,16 +7,18 @@ func _ready():
 	$Options/BlockOptions.hide()
 	update_ready()
 	if Global.is_host: # Server
-		multiplayer.peer_connected.connect(_peer_connected)
-		multiplayer.peer_disconnected.connect(_peer_disconnected)
-		var infos = create_infos()
-		Global.player_count += 1
-		Global.players_dict[multiplayer.get_unique_id()] = infos
+		if Global.new_lobby:
+			multiplayer.peer_connected.connect(_peer_connected)
+			multiplayer.peer_disconnected.connect(_peer_disconnected)
+			var infos = create_infos()
+			Global.player_count += 1
+			Global.players_dict[multiplayer.get_unique_id()] = infos
 		update_player_list.rpc(Global.players_dict)
 	
 	else: # Client
-		multiplayer.connected_to_server.connect(_connected_to_server)
-		multiplayer.server_disconnected.connect(_server_disconnected)
+		if Global.new_lobby:
+			multiplayer.connected_to_server.connect(_connected_to_server)
+			multiplayer.server_disconnected.connect(_server_disconnected)
 
 func _peer_connected(id : int):
 	print("["+str(multiplayer.get_unique_id())+"]  " + str(id) + " connected.")

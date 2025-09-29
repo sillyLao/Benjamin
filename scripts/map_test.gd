@@ -1,7 +1,6 @@
 extends Node3D
 
 var character_scene : PackedScene = preload("res://scenes/Entities/character.tscn")
-var tab_line_scene : PackedScene = preload("res://scenes/UI/tab_line.tscn")
 var available_respawns : Array
 
 # Called when the node enters the scene tree for the first time.
@@ -12,34 +11,33 @@ func _ready():
 			available_respawns.append(node)
 		spawn_players()
 		Global.launch_online_game.rpc()
-	create_tab()
-		
+	Global.current_map = self
 
 func spawn_players():
 	var spawn_dict : Dictionary
 	for id in Global.players_dict:
 		var new_player : CharacterBody3D = character_scene.instantiate()
-		var n = randi_range(0, len(available_respawns)-1)
-		var spawn_node = available_respawns.pop_at(n)
 		spawn_dict[id] = {}
-		spawn_dict[id]["node"] = spawn_node.name
 		new_player.name = str(id)
 		add_child(new_player)
+	assign_spawn(spawn_dict)
+
+func assign_spawn(spawn_dict: Dictionary):
+	var quintus : bool
+	if not spawn_dict:
+		quintus = true
+	for id in Global.players_dict:
+		if quintus:
+			spawn_dict[id] = {}
+		var n = randi_range(0, len(available_respawns)-1)
+		var spawn_node = available_respawns.pop_at(n)
+		spawn_dict[id]["node"] = spawn_node.name
 	assign_spawn_node.rpc(spawn_dict)
 
 @rpc("authority", "call_local", "reliable")
 func assign_spawn_node(dict: Dictionary):
 	get_node(str(multiplayer.get_unique_id())).spawn_node = get_node("Map/Respawns/"+dict[multiplayer.get_unique_id()]["node"])
 	get_node(str(multiplayer.get_unique_id())).position_spawn()
-
-func create_tab():
-	for id in Global.players_dict:
-		var tab_line = tab_line_scene.instantiate()
-		tab_line.get_node("MarginContainer/HBoxContainer/Name").text = Global.players_dict[id]["pseudo"]
-		tab_line.get_node("MarginContainer/HBoxContainer/LaserColor").color = Global.players_dict[id]["laser_color"]
-		tab_line.name = str(id)
-		UIOverlay.tab.add_child(tab_line)
-		UIOverlay.tab.add_child(HSeparator.new())
 
 func check_respawns():
 	available_respawns.clear()

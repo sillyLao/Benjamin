@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://denv2whxt2gd3"]
+[gd_scene load_steps=17 format=3 uid="uid://denv2whxt2gd3"]
 
 [ext_resource type="Script" uid="uid://cvhxm20chx2nu" path="res://scripts/ui_overlay.gd" id="1_3i566"]
 [ext_resource type="Texture2D" uid="uid://lgkupfsrrvo2" path="res://assets/ui/cursor.png" id="2_rtbcl"]
@@ -44,6 +44,13 @@ bg_color = Color(0, 0, 0, 0.3)
 [sub_resource type="SystemFont" id="SystemFont_g0uky"]
 font_names = PackedStringArray("ShangoGothic ☞")
 font_weight = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cgy08"]
+bg_color = Color(0, 0, 0, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
 [sub_resource type="Animation" id="Animation_jaqk0"]
 length = 0.001
@@ -246,12 +253,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_4wf6i")
 [node name="VBoxContainer" type="VBoxContainer" parent="IG UI/Tab"]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="IG UI/Tab/VBoxContainer"]
+[node name="Head" type="ColorRect" parent="IG UI/Tab/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 color = Color(0, 0, 0, 0.3019608)
 
-[node name="Label" type="Label" parent="IG UI/Tab/VBoxContainer/ColorRect"]
+[node name="Label" type="Label" parent="IG UI/Tab/VBoxContainer/Head"]
 layout_mode = 0
 offset_left = 489.0
 offset_top = -2.0
@@ -259,7 +266,7 @@ offset_right = 529.0
 offset_bottom = 21.0
 text = "Kills"
 
-[node name="Label3" type="Label" parent="IG UI/Tab/VBoxContainer/ColorRect"]
+[node name="Label3" type="Label" parent="IG UI/Tab/VBoxContainer/Head"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = -2.0
@@ -267,7 +274,7 @@ offset_right = 60.0
 offset_bottom = 21.0
 text = "Scoreboard"
 
-[node name="Label2" type="Label" parent="IG UI/Tab/VBoxContainer/ColorRect"]
+[node name="Label2" type="Label" parent="IG UI/Tab/VBoxContainer/Head"]
 layout_mode = 0
 offset_left = 543.0
 offset_top = -2.0
@@ -296,6 +303,19 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.6, 0.6)
+
+[node name="Time" type="Label" parent="IG UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 78.0
+offset_bottom = 23.0
+grow_horizontal = 2
+
+[node name="Timer" type="Timer" parent="IG UI/Time"]
+one_shot = true
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
@@ -360,6 +380,80 @@ layout_mode = 2
 theme = ExtResource("3_aisqu")
 text = "QUIT"
 
+[node name="GameEnded" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameEnded"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+metadata/_edit_lock_ = true
+
+[node name="Tab" type="Control" parent="GameEnded"]
+anchors_preset = 0
+offset_left = 85.0
+offset_top = 97.0
+offset_right = 125.0
+offset_bottom = 137.0
+
+[node name="PlayerList" type="PanelContainer" parent="GameEnded"]
+custom_minimum_size = Vector2(245, 335)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -332.0
+offset_top = 60.0
+offset_right = -87.0
+offset_bottom = 395.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cgy08")
+
+[node name="MarginContainer" type="MarginContainer" parent="GameEnded/PlayerList"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameEnded/PlayerList/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameEnded"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -331.0
+offset_top = -162.0
+offset_right = -67.0
+offset_bottom = -46.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="Continue" type="Button" parent="GameEnded/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_aisqu")
+text = "Continue"
+
+[node name="Lobby" type="Button" parent="GameEnded/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_aisqu")
+text = "Back to lobby"
+
 [node name="Notifications" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -395,6 +489,9 @@ stream = ExtResource("5_jaqk0")
 autoplay = true
 parameters/looping = true
 
+[connection signal="timeout" from="IG UI/Time/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="PauseMenu/ColorRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="GameEnded/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="GameEnded/VBoxContainer/Lobby" to="." method="_on_lobby_pressed"]
