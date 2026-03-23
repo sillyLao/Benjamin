@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d0pujsbfs7fl2"
+path="res://.godot/imported/LES_____DE_CITÉ.mp3-9e51ed7acd74aced895e8911888639b1.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/online musics/LES_____DE_CITÉ.mp3"
+dest_files=["res://.godot/imported/LES_____DE_CITÉ.mp3-9e51ed7acd74aced895e8911888639b1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
