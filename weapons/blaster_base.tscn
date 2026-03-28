@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://jergttls6jx1"]
+
+[ext_resource type="Script" uid="uid://cv8tcmcp82m04" path="res://weapons/blaster_base.gd" id="1_w4owy"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w4owy"]
+
+[node name="BlasterBase" type="Node3D" unique_id=806299378]
+script = ExtResource("1_w4owy")
+
+[node name="RegainAmmoTimer" type="Timer" parent="." unique_id=2054772346]
+wait_time = 0.6
+one_shot = true
+
+[node name="Reload" type="Timer" parent="." unique_id=150826462]
+one_shot = true
+
+[node name="RegainCooldown" type="Timer" parent="." unique_id=2131727783]
+one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1648182117]
+replication_config = SubResource("SceneReplicationConfig_w4owy")
+
+[connection signal="timeout" from="RegainAmmoTimer" to="." method="_on_regain_ammo_timer_timeout"]
+[connection signal="timeout" from="Reload" to="." method="_on_reload_timeout"]
+[connection signal="timeout" from="RegainCooldown" to="." method="_on_regain_cooldown_timeout"]

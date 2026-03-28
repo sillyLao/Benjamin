@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://s1lxyc0nycqa"]
+
+[ext_resource type="Script" uid="uid://bbftbhmfl18fp" path="res://weapons/projectiles/laser_ray.gd" id="1_76fjv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cc4jr"]
+shading_mode = 0
+albedo_color = Color(0.3078494, 0, 1, 1)
+
+[node name="LaserRay" type="CSGCylinder3D" unique_id=536453488]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+layers = 2
+transparency = 0.6
+radius = 0.03
+sides = 3
+material = SubResource("StandardMaterial3D_cc4jr")
+script = ExtResource("1_76fjv")
+
+[node name="Timer" type="Timer" parent="." unique_id=430788673]
+wait_time = 0.2
+one_shot = true
+autostart = true

@@ -1,0 +1,176 @@
+[gd_scene format=3 uid="uid://b7r3i1ls2ja54"]
+
+[ext_resource type="PackedScene" uid="uid://d3jjjkteki5ph" path="res://characters/components/movement.tscn" id="1_d6mqw"]
+[ext_resource type="Script" uid="uid://58xlbxb7fom5" path="res://characters/benjamin.gd" id="1_e3a86"]
+[ext_resource type="Script" uid="uid://dv2c1orhaxywb" path="res://characters/camera_3d.gd" id="2_e3a86"]
+[ext_resource type="PackedScene" uid="uid://oh28tb74mfbe" path="res://assets/models/man/scene.gltf" id="3_rfwun"]
+[ext_resource type="PackedScene" uid="uid://dkxkqmua7sd6f" path="res://weapons/blaster_1.tscn" id="4_thw78"]
+[ext_resource type="PackedScene" uid="uid://bd8tnuu27seej" path="res://weapons/pets/toy_pig.tscn" id="5_e3a86"]
+[ext_resource type="PackedScene" uid="uid://b3jm323xtf7vv" path="res://weapons/pets/rubber_duck.tscn" id="6_rfwun"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_easfn"]
+radius = 0.3
+height = 1.7998376
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c4ypi"]
+radius = 0.3
+height = 1.8847852
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hjy4p"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:invulnerable")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2s8rh"]
+height = 0.3052246
+radius = 0.4
+
+[sub_resource type="Animation" id="Animation_easfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.395, -0.3, -0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c4ypi"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D/Hand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.4),
+"transitions": PackedFloat32Array(0.3, 0.5, 1),
+"update": 0,
+"values": [Vector3(0.395, -0.3, -0.3), Vector3(0.395, -0.25, -0.16), Vector3(0.395, -0.3, -0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D/Hand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.4),
+"transitions": PackedFloat32Array(0.2, 2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.7330383, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjy4p"]
+_data = {
+&"RESET": SubResource("Animation_easfn"),
+&"shoot": SubResource("Animation_c4ypi")
+}
+
+[node name="Benjamin" type="CharacterBody3D" unique_id=1906675894 node_paths=PackedStringArray("pet")]
+script = ExtResource("1_e3a86")
+pet = NodePath("RubberDuck")
+MIN_SCALE = 0.2
+
+[node name="Movement" parent="." unique_id=1869259816 instance=ExtResource("1_d6mqw")]
+
+[node name="Collisions" type="CollisionShape3D" parent="." unique_id=908394809]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9027471, 0)
+shape = SubResource("CapsuleShape3D_easfn")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1403234114]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1.98, 0)
+billboard = 1
+double_sided = false
+text = "Quintus"
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1378862735]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.657054, -0.010118432)
+fov = 90.0
+script = ExtResource("2_e3a86")
+
+[node name="Hand" type="Node3D" parent="Camera3D" unique_id=99755568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.395, -0.3, -0.3)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Camera3D/Hand" unique_id=551417382]
+_spawnable_scenes = PackedStringArray("uid://dkxkqmua7sd6f", "uid://c4rlnusgyma78")
+spawn_path = NodePath("..")
+
+[node name="Blaster1" parent="Camera3D/Hand" unique_id=806299378 instance=ExtResource("4_thw78")]
+
+[node name="PlayerArea" type="Area3D" parent="." unique_id=934896340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83605397, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerArea" unique_id=542109290]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.030854523, 0)
+shape = SubResource("CapsuleShape3D_c4ypi")
+debug_color = Color(0, 0.70196074, 0.038601026, 0.41960785)
+
+[node name="Sketchfab_Scene" parent="." unique_id=1337904794 instance=ExtResource("3_rfwun")]
+transform = Transform3D(-0.001, 0, -8.742278e-11, 0, 0.001, 0, 8.742278e-11, 0, -0.001, 0, 0.83605397, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1512320955]
+replication_config = SubResource("SceneReplicationConfig_hjy4p")
+
+[node name="RespawnTimer" type="Timer" parent="." unique_id=1971458474]
+wait_time = 3.0
+one_shot = true
+
+[node name="FeetBox" type="Area3D" parent="." unique_id=456550232]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FeetBox" unique_id=1599845700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024477556, 0)
+shape = SubResource("CylinderShape3D_2s8rh")
+debug_color = Color(0.70196074, 0, 0.0154072065, 0.41960785)
+
+[node name="ToyPig" parent="." unique_id=1289180663 node_paths=PackedStringArray("prey") instance=ExtResource("5_e3a86")]
+visible = false
+source = true
+prey = NodePath("..")
+
+[node name="RubberDuck" parent="." unique_id=1105729414 instance=ExtResource("6_rfwun")]
+visible = false
+source = true
+cooldown = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=801430729]
+libraries/ = SubResource("AnimationLibrary_hjy4p")
+
+[node name="Invulnerability" type="Timer" parent="." unique_id=604047951]
+one_shot = true
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
+[connection signal="area_entered" from="FeetBox" to="." method="_on_feet_box_area_entered"]
+[connection signal="timeout" from="Invulnerability" to="." method="_on_invulnerability_timeout"]

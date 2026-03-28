@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://c3fu8xemlvr4i"]
+
+[ext_resource type="Script" uid="uid://drbini0y70tku" path="res://ui/menus/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://cwvvrxi3msan5" path="res://ui/menus/online_menu.tscn" id="3_wu84c"]
+[ext_resource type="FontFile" uid="uid://ohss151a4oi5" path="res://assets/fonts/ShangoGothic-Bold.ttf" id="5_2itis"]
+[ext_resource type="Texture2D" uid="uid://usy41nfmek1x" path="res://assets/20250919_212530.jpg" id="5_4q1m5"]
+
+[node name="MainMenu" type="Control" unique_id=2109665033]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_bqqt6")
+online = ExtResource("3_wu84c")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1960517109]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.28235295, 0.13725491, 0.13333334, 1)
+
+[node name="20250919212530" type="TextureRect" parent="." unique_id=700932265]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.25
+anchor_right = 0.05
+anchor_bottom = 0.25
+offset_right = 828.0
+offset_bottom = 1128.0
+scale = Vector2(0.397343, 0.397343)
+texture = ExtResource("5_4q1m5")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="." unique_id=370654489]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -212.0
+offset_right = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_2itis")
+theme_override_font_sizes/font_size = 86
+text = "BENJAMIN"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1227105792]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -26.5
+offset_right = 95.0
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="Solo" type="Button" parent="VBoxContainer" unique_id=608564163]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_l6cm7")
+disabled = true
+text = "Solo"
+
+[node name="Online" type="Button" parent="VBoxContainer" unique_id=719898753]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("1_l6cm7")
+text = "ONLINE"
+
+[connection signal="pressed" from="VBoxContainer/Solo" to="." method="_on_solo_pressed"]
+[connection signal="pressed" from="VBoxContainer/Online" to="." method="_on_online_pressed"]

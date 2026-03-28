@@ -1,0 +1,707 @@
+[gd_scene format=3 uid="uid://cf4mrrjcp7djo"]
+
+[ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="1_j8ywt"]
+[ext_resource type="Script" uid="uid://csagupgxp04fy" path="res://ui/menus/online_lobby_menu.gd" id="1_vdcme"]
+[ext_resource type="Theme" uid="uid://byhhmi0rfbtrt" path="res://themes/main_menu_small_buttons.tres" id="3_bfe55"]
+[ext_resource type="Texture2D" uid="uid://bkxfexw80n62w" path="res://assets/ui/check.png" id="3_f1llj"]
+[ext_resource type="Theme" uid="uid://vnno0212byph" path="res://themes/customize_button.tres" id="5_m5m8g"]
+[ext_resource type="Texture2D" uid="uid://c4lth0oda8cwk" path="res://icon.svg" id="6_xc7lt"]
+[ext_resource type="Texture2D" uid="uid://d6by077afa0y" path="res://assets/ui/weapons_icons/blaster1.png" id="7_ueft8"]
+[ext_resource type="PackedScene" uid="uid://0tu733yfnxli" path="res://ui/selection screens/weapon_selection_screen.tscn" id="8_qnjq4"]
+
+[sub_resource type="SystemFont" id="SystemFont_j8ywt"]
+font_names = PackedStringArray("ShangoGothic ☞")
+font_weight = 999
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5m8g"]
+bg_color = Color(0.14767182, 0.14767182, 0.14767176, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_046sn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1llj"]
+bg_color = Color(1, 1, 1, 0.066)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1llj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_acy60"]
+
+[node name="OnlineLobbyMenu" type="Control" unique_id=184887106]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vdcme")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1026522628]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.28235295, 0.13725491, 0.13333334, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1911446515]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -156.0
+offset_right = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_j8ywt")
+theme_override_font_sizes/font_size = 86
+text = "ONLINE"
+
+[node name="StartGame" type="Button" parent="." unique_id=1711542956]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -173.0
+offset_top = -90.0
+offset_right = -57.0
+offset_bottom = -37.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme = ExtResource("1_j8ywt")
+text = "START"
+
+[node name="Ready" type="Button" parent="." unique_id=314864895]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.5
+offset_top = -93.0
+offset_right = 64.5
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme = ExtResource("1_j8ywt")
+toggle_mode = true
+text = "READY"
+
+[node name="PlayerList" type="PanelContainer" parent="." unique_id=177895094]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.07118055
+anchor_top = 0.25
+anchor_right = 0.36979166
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerList" unique_id=1725240124]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerList/MarginContainer" unique_id=1868559095]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerList/MarginContainer/VBoxContainer" unique_id=1585627228]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PlayerList/MarginContainer/VBoxContainer/HBoxContainer" unique_id=228735752]
+layout_mode = 2
+text = "Androgyne"
+
+[node name="TextureRect" type="TextureRect" parent="PlayerList/MarginContainer/VBoxContainer/HBoxContainer" unique_id=618576072]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+texture = ExtResource("3_f1llj")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BACK" type="Button" parent="." unique_id=836718356]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme = ExtResource("3_bfe55")
+text = "BACK"
+
+[node name="CopyIP" type="Button" parent="." unique_id=162792768]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 165.0
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 8.0
+focus_mode = 0
+theme = ExtResource("3_bfe55")
+text = "COPY IP"
+
+[node name="Customize" type="Control" parent="." unique_id=995659955]
+layout_mode = 1
+anchor_left = 0.050347224
+anchor_top = 0.83950615
+anchor_right = 0.38194445
+anchor_bottom = 0.95987654
+offset_top = -1.5258789e-05
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Customize" unique_id=1098780318]
+layout_mode = 0
+anchor_left = 0.10209424
+anchor_top = 0.051282052
+anchor_right = 0.92670155
+anchor_bottom = 0.8333333
+theme = ExtResource("5_m5m8g")
+text = "   CUSTOMIZE   "
+metadata/_edit_use_anchors_ = true
+
+[node name="Shade" type="ColorRect" parent="Customize" unique_id=1807683995]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49411765)
+
+[node name="OptionsPanel" type="PanelContainer" parent="Customize" unique_id=1247235057]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -405.0
+offset_top = -205.0
+offset_right = 405.0
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m5m8g")
+
+[node name="MarginContainer" type="MarginContainer" parent="Customize/OptionsPanel" unique_id=883308704]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Customize/OptionsPanel/MarginContainer" unique_id=581067220]
+layout_mode = 2
+
+[node name="L" type="VBoxContainer" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer" unique_id=2003525337]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LaserColor" type="HBoxContainer" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/L" unique_id=442912912]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/L/LaserColor" unique_id=1429080965]
+layout_mode = 2
+text = "Laser color"
+
+[node name="VSeparator" type="VSeparator" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/L/LaserColor" unique_id=1634187857]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_046sn")
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/L/LaserColor" unique_id=1450282317]
+custom_minimum_size = Vector2(80, 50)
+layout_mode = 2
+color = Color(1, 1, 1, 1)
+
+[node name="VSeparator" type="VSeparator" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer" unique_id=656737111]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="R" type="VBoxContainer" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer" unique_id=311800076]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Character" type="TextureButton" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R" unique_id=1761001095]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("6_xc7lt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R" unique_id=187771337]
+layout_mode = 2
+
+[node name="Weapon" type="TextureButton" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer" unique_id=1949457739]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource("7_ueft8")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Movement" type="TextureButton" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer" unique_id=306876685]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource("6_xc7lt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R" unique_id=1262399157]
+layout_mode = 2
+
+[node name="Item" type="TextureButton" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer2" unique_id=1457585263]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource("6_xc7lt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Pet" type="TextureButton" parent="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer2" unique_id=654317763]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource("6_xc7lt")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="OK" type="Button" parent="Customize" unique_id=1463890343]
+visible = false
+self_modulate = Color(0.4896004, 1.2990143, 0.19526802, 1)
+top_level = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4704861
+anchor_top = 0.70910496
+anchor_right = 0.5295139
+anchor_bottom = 0.79089504
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme = ExtResource("1_j8ywt")
+toggle_mode = true
+text = "OK"
+metadata/_edit_use_anchors_ = true
+
+[node name="GameSettings" type="PanelContainer" parent="." unique_id=1824234933]
+layout_mode = 0
+anchor_left = 0.5208333
+anchor_top = 0.27160493
+anchor_right = 0.828125
+anchor_bottom = 0.77006173
+offset_top = 1.5258789e-05
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1llj")
+metadata/_edit_use_anchors_ = true
+
+[node name="List" type="MarginContainer" parent="GameSettings" unique_id=567666135]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettings/List" unique_id=300507578]
+layout_mode = 2
+
+[node name="GameMode" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=2083763520]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/GameMode" unique_id=1235613469]
+layout_mode = 2
+text = "Game mode : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/GameMode" unique_id=701050971]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/GameMode" unique_id=1042029427]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Battlefield"
+
+[node name="Format" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=492929119]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Format" unique_id=2016201334]
+layout_mode = 2
+text = "Format : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Format" unique_id=1209027317]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Format" unique_id=1309716284]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Free for all"
+
+[node name="Teams" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=867591913]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Teams" unique_id=651138803]
+layout_mode = 2
+text = "Teams : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Teams" unique_id=1520849931]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Teams" unique_id=1174368047]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Free teams"
+
+[node name="WinCon" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=1851310844]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/WinCon" unique_id=1503112257]
+layout_mode = 2
+text = "Game stops with : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/WinCon" unique_id=1424270281]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/WinCon" unique_id=139043717]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Time"
+
+[node name="Time" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=658162867]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Time" unique_id=1697294464]
+layout_mode = 2
+text = "Time limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Time" unique_id=1946948192]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Time" unique_id=2145872477]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "300"
+
+[node name="Score" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=560155104]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Score" unique_id=590400218]
+layout_mode = 2
+text = "Score limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Score" unique_id=572558542]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Score" unique_id=1367725872]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "10"
+
+[node name="Map" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=1927158482]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/Map" unique_id=1255328573]
+layout_mode = 2
+text = "Map : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/Map" unique_id=795421398]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Map" unique_id=1327705987]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "MapTest"
+
+[node name="KitRestrictions" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=1011157835]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/List/VBoxContainer/KitRestrictions" unique_id=1600190879]
+layout_mode = 2
+text = "Kit Restrictions : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/List/VBoxContainer/KitRestrictions" unique_id=1176797698]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/KitRestrictions" unique_id=1563492784]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "No restrictions"
+
+[node name="HSeparator" type="HSeparator" parent="GameSettings/List/VBoxContainer" unique_id=612786681]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_acy60")
+
+[node name="Edit" type="Button" parent="GameSettings/List/VBoxContainer" unique_id=1456397075]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_bfe55")
+text = "Edit"
+
+[node name="Edit" type="MarginContainer" parent="GameSettings" unique_id=1950230231]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettings/Edit" unique_id=100098371]
+layout_mode = 2
+
+[node name="GameMode" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=1489104455]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/GameMode" unique_id=756656412]
+layout_mode = 2
+text = "Game mode : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/GameMode" unique_id=1757692386]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/GameMode" unique_id=1213641905]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Battlefield"
+popup/item_0/id = 0
+popup/item_1/text = "Deathmatch"
+popup/item_1/id = 1
+
+[node name="Format" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=194254245]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Format" unique_id=377306365]
+layout_mode = 2
+text = "Format : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Format" unique_id=1488301712]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/Format" unique_id=1460105200]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Free for all"
+popup/item_0/id = 0
+popup/item_1/text = "Teams"
+popup/item_1/id = 1
+
+[node name="Teams" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=285960067]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Teams" unique_id=1114792587]
+layout_mode = 2
+text = "Teams : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Teams" unique_id=1913235092]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/Teams" unique_id=1916543551]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "Free teams"
+popup/item_0/id = 0
+popup/item_1/text = "Two sides"
+popup/item_1/id = 1
+popup/item_2/text = "Random duos"
+popup/item_2/id = 2
+
+[node name="WinCon" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=1793933541]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/WinCon" unique_id=1445172450]
+layout_mode = 2
+text = "Game stops with : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/WinCon" unique_id=889456071]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/WinCon" unique_id=2101145559]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Time"
+popup/item_0/id = 0
+popup/item_1/text = "Score"
+popup/item_1/id = 1
+
+[node name="Time" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=504986122]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Time" unique_id=477309086]
+layout_mode = 2
+text = "Time Limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Time" unique_id=321068038]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="LineEdit" type="LineEdit" parent="GameSettings/Edit/VBoxContainer/Time" unique_id=272683876]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "300"
+
+[node name="Score" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=2130226770]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Score" unique_id=48952971]
+layout_mode = 2
+text = "Time Limit : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Score" unique_id=1264184690]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="LineEdit" type="LineEdit" parent="GameSettings/Edit/VBoxContainer/Score" unique_id=745885715]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "10"
+
+[node name="Map" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=1959154759]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/Map" unique_id=1999470631]
+layout_mode = 2
+text = "Map : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/Map" unique_id=705960517]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="OptionButton" type="OptionButton" parent="GameSettings/Edit/VBoxContainer/Map" unique_id=2125055597]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "MapTest"
+popup/item_0/id = 0
+popup/item_1/text = "Atoll-Lone"
+popup/item_1/id = 1
+
+[node name="KitRestrictions" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=1997878012]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="GameSettings/Edit/VBoxContainer/KitRestrictions" unique_id=955848090]
+layout_mode = 2
+text = "Kit Restrictions : "
+
+[node name="VSeparator" type="VSeparator" parent="GameSettings/Edit/VBoxContainer/KitRestrictions" unique_id=706700053]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
+
+[node name="MenuButton" type="MenuButton" parent="GameSettings/Edit/VBoxContainer/KitRestrictions" unique_id=251219987]
+clip_contents = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "No Restrictions"
+item_count = 1
+popup/item_0/text = "No restrictions"
+popup/item_0/id = 0
+
+[node name="HSeparator" type="HSeparator" parent="GameSettings/Edit/VBoxContainer" unique_id=410288670]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_acy60")
+
+[node name="OK" type="Button" parent="GameSettings/Edit/VBoxContainer" unique_id=1224210528]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_bfe55")
+text = "OK"
+
+[node name="WeaponSelectionScreen" parent="." unique_id=1227593594 instance=ExtResource("8_qnjq4")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="toggled" from="Ready" to="." method="_on_ready_toggled"]
+[connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="CopyIP" to="." method="_on_copy_ip_pressed"]
+[connection signal="pressed" from="Customize/Button" to="." method="_on_customize_pressed"]
+[connection signal="pressed" from="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/Character" to="." method="_on_character_pressed"]
+[connection signal="pressed" from="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer/Weapon" to="." method="_on_weapon_pressed"]
+[connection signal="pressed" from="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer/Movement" to="." method="_on_movement_pressed"]
+[connection signal="pressed" from="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer2/Item" to="." method="_on_item_pressed"]
+[connection signal="pressed" from="Customize/OptionsPanel/MarginContainer/HBoxContainer/R/HBoxContainer2/Pet" to="." method="_on_pet_pressed"]
+[connection signal="pressed" from="Customize/OK" to="." method="_on_customize_ok_pressed"]
+[connection signal="pressed" from="GameSettings/List/VBoxContainer/Edit" to="." method="_on_edit_pressed"]
+[connection signal="pressed" from="GameSettings/Edit/VBoxContainer/OK" to="." method="_on_ok_pressed"]

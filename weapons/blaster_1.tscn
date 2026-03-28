@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dkxkqmua7sd6f"]
+
+[ext_resource type="PackedScene" uid="uid://jergttls6jx1" path="res://weapons/blaster_base.tscn" id="1_72j1b"]
+[ext_resource type="PackedScene" uid="uid://sul0w0ltquto" path="res://assets/models/KNL Blaster Kit/blaster-b.fbx" id="2_ylgvg"]
+
+[node name="Blaster1" unique_id=806299378 instance=ExtResource("1_72j1b")]
+
+[node name="model" parent="." index="0" unique_id=692045419 instance=ExtResource("2_ylgvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09110093, 0.04381475)
+
+[editable path="model"]

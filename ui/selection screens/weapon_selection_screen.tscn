@@ -1,0 +1,268 @@
+[gd_scene format=3 uid="uid://0tu733yfnxli"]
+
+[ext_resource type="Script" uid="uid://bihtsy3hm01g2" path="res://ui/selection screens/weapon_selection_screen.gd" id="1_c7m2q"]
+[ext_resource type="PackedScene" uid="uid://dkxkqmua7sd6f" path="res://weapons/blaster_1.tscn" id="1_ys3yo"]
+[ext_resource type="Theme" uid="uid://dic8vi8f7m3cl" path="res://themes/main_menu_buttons.tres" id="3_xk44j"]
+[ext_resource type="Texture2D" uid="uid://d6by077afa0y" path="res://assets/ui/weapons_icons/blaster1.png" id="4_2d4yy"]
+[ext_resource type="Script" uid="uid://dx4a65klf77f4" path="res://ui/selection screens/weapon_button.gd" id="5_2d4yy"]
+[ext_resource type="Texture2D" uid="uid://bp7pdfr7ao8i2" path="res://assets/ui/weapons_icons/sniper1.png" id="5_fprpa"]
+[ext_resource type="PackedScene" uid="uid://c803t3mdsjtgl" path="res://assets/models/KNL Blaster Kit/blaster-e.fbx" id="7_2d4yy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xk44j"]
+bg_color = Color(1, 1, 1, 0.20784314)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ys3yo"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_c7m2q"]
+sky_material = SubResource("ProceduralSkyMaterial_ys3yo")
+
+[sub_resource type="Environment" id="Environment_c21tq"]
+background_mode = 2
+sky = SubResource("Sky_c7m2q")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="WeaponSelectionScreen" type="Control" unique_id=1227593594]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_c7m2q")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1402550252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14901961, 0.078431375, 0.24313726, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=777771803]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=838281042]
+layout_mode = 2
+
+[node name="Previsualisation" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=2133920228]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Previsualisation" unique_id=1715287973]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Presvisualisation"
+horizontal_alignment = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MarginContainer/HBoxContainer/Previsualisation" unique_id=1724616126]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="MarginContainer/HBoxContainer/Previsualisation/SubViewportContainer" unique_id=2048963364]
+transparent_bg = true
+handle_input_locally = false
+scaling_3d_scale = 2.0
+anisotropic_filtering_level = 0
+size = Vector2i(307, 500)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MarginContainer/HBoxContainer/Previsualisation/SubViewportContainer/SubViewport" unique_id=799233282]
+transform = Transform3D(-0.48290223, -0.16489491, 0.8600088, -0.009821876, 0.9830685, 0.18297486, -0.87561923, 0.07991206, -0.47634554, 0.771, 0.3, -0.433)
+projection = 1
+size = 2.3
+
+[node name="Description" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=2051129878]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Description" unique_id=622085204]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Description"
+horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/Description" unique_id=957808104]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Je sais pas comment expliquer
+J'ai 29 ans je m'appelle Benjamin
+Je sais pas comment commencer
+Mes parents m'ont vendu à mes 3 ans à un laboratoire qui rétrécit des personnes
+Ici des parents adoptifs m'ont accueilli
+On n'a pas d'appareil photo ni de localisation juste un microphone
+On n'a que des tablettes fabriquées par le laboratoire à notre taille
+Tout est à notre taille
+On a notre ville entourée d'un mur géant et une vitre au dessus
+Normalement on n'a pas les réseaux sociaux mais j'ai réussi à avoir instagram
+Je pense être en France et que c'est à cause des dirigeants politiques
+J'ai une fille
+Je demande des renseignements en espérant ne pas recevoir des insultes ou des moqueries
+Je demande pas à y croire ou pas ça me change rien
+Juste des renseignements
+Désolé encore du dérangement"
+horizontal_alignment = 1
+
+[node name="OK" type="Button" parent="MarginContainer/HBoxContainer/Description" unique_id=1316977840]
+self_modulate = Color(0.4896004, 1.2990143, 0.19526802, 1)
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_xk44j")
+text = "OK"
+metadata/_edit_use_anchors_ = true
+
+[node name="VSeparator2" type="VSeparator" parent="MarginContainer/HBoxContainer" unique_id=1907628788]
+layout_mode = 2
+
+[node name="Selection" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1971621335]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Selection" unique_id=1404773939]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Selection"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/Selection" unique_id=608488061]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer" unique_id=2040034042]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Line1" type="HBoxContainer" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer" unique_id=2073472397]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="Blaster1" type="TextureRect" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1" unique_id=1252174670]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_2d4yy")
+expand_mode = 4
+stretch_mode = 4
+script = ExtResource("5_2d4yy")
+description = "Blaster classique, tir rapide et distance moyenne. Efficace pour un style polyvalent."
+camera_size = 1.2
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1/Blaster1" unique_id=1874359324]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk44j")
+
+[node name="Sniper1" type="TextureRect" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1" unique_id=1844911000]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("5_fprpa")
+expand_mode = 4
+stretch_mode = 4
+script = ExtResource("5_2d4yy")
+description = "Sniper lourd, cadence faible mais portée accrue et dégâts élevés. Visez la tête pour infliger un bonus de dégâts."
+camera_size = 2.3
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1/Sniper1" unique_id=1155736253]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk44j")
+
+[node name="Blaster3" type="TextureRect" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1" unique_id=2092347848]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_2d4yy")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1/Blaster3" unique_id=223398925]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk44j")
+
+[node name="Blaster4" type="TextureRect" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1" unique_id=1716499191]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture = ExtResource("5_fprpa")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/Selection/ScrollContainer/VBoxContainer/Line1/Blaster4" unique_id=996927454]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xk44j")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1237309472]
+
+[node name="Pivot" type="Node3D" parent="Node3D" unique_id=1872046587]
+
+[node name="Blaster1" parent="Node3D/Pivot" unique_id=806299378 instance=ExtResource("1_ys3yo")]
+visible = false
+script = null
+
+[node name="Sniper1" parent="Node3D/Pivot" unique_id=336836563 instance=ExtResource("7_2d4yy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045, 0.075, -0.7)
+visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D" unique_id=1092480551]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node3D" unique_id=1209263520]
+environment = SubResource("Environment_c21tq")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Description/OK" to="." method="_on_ok_pressed"]

@@ -1,0 +1,189 @@
+[gd_scene format=3 uid="uid://d0w35hbkuojj1"]
+
+[ext_resource type="Script" uid="uid://cvj2ps5hvsqyf" path="res://ui/overlays/notification.gd" id="1_8ians"]
+[ext_resource type="Texture2D" uid="uid://c4lth0oda8cwk" path="res://icon.svg" id="1_rnbxd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ians"]
+bg_color = Color(0.09803922, 0.09803922, 0.18039216, 0.83137256)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ians"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gya0v"]
+
+[sub_resource type="Animation" id="Animation_gya0v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [300.0]
+}
+
+[sub_resource type="Animation" id="Animation_8ians"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [300.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_02p8x"]
+resource_name = "fade_out"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [0.0, 300.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_02p8x"]
+_data = {
+&"RESET": SubResource("Animation_gya0v"),
+&"fade_in": SubResource("Animation_8ians"),
+&"fade_out": SubResource("Animation_02p8x")
+}
+
+[node name="Notification" type="PanelContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -852.0
+offset_top = -648.0
+offset_right = -602.00085
+offset_bottom = -530.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8ians")
+script = ExtResource("1_8ians")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+color = Color(0.59717613, 0.59717613, 0.5971761, 1)
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.0
+mouse_filter = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8ians")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_rnbxd")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 5
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gya0v")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+bbcode_enabled = true
+text = "Tu as été [b]rétréci[/b] !
+
+Quel Dommage..."
+fit_content = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_02p8x")
+}
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

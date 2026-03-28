@@ -1,0 +1,82 @@
+[gd_resource type="Theme" format=3 uid="uid://vnno0212byph"]
+
+[ext_resource type="FontFile" uid="uid://ohss151a4oi5" path="res://assets/fonts/ShangoGothic-Bold.ttf" id="1_p2d48"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnx7c"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.2123048, 0.21230489, 0.21230462, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.11489671, 0.114896856, 0.11489665, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.16206565, 0.16206557, 0.16206548, 0.5921569)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s68q1"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.7162962, 0.71629626, 0.7162961, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.65, 0.65, 0.65, 0.5921569)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2d48"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.7162962, 0.71629626, 0.7162961, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.86036915, 0.8603692, 0.8603691, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.65, 0.65, 0.65, 0.5921569)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kskun"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.5689727, 0.5689728, 0.5689725, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.37791866, 0.37791896, 0.37791854, 1)
+corner_radius_top_left = 10
+corner_radius_bottom_right = 10
+shadow_color = Color(0.65, 0.65, 0.65, 0.5921569)
+shadow_size = 4
+shadow_offset = Vector2(-5, 5)
+
+[resource]
+Button/colors/font_color = Color(0.23, 0.23, 0.23, 1)
+Button/colors/font_hover_color = Color(0.23137255, 0.23137255, 0.23137255, 1)
+Button/colors/font_pressed_color = Color(0.23137255, 0.23137255, 0.23137255, 1)
+Button/font_sizes/font_size = 40
+Button/fonts/font = ExtResource("1_p2d48")
+Button/styles/disabled = SubResource("StyleBoxFlat_nnx7c")
+Button/styles/hover = SubResource("StyleBoxFlat_s68q1")
+Button/styles/normal = SubResource("StyleBoxFlat_p2d48")
+Button/styles/pressed = SubResource("StyleBoxFlat_kskun")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c4rlnusgyma78"]
+
+[ext_resource type="PackedScene" uid="uid://jergttls6jx1" path="res://weapons/blaster_base.tscn" id="1_0mmfq"]
+[ext_resource type="PackedScene" uid="uid://c803t3mdsjtgl" path="res://assets/models/KNL Blaster Kit/blaster-e.fbx" id="2_iljeb"]
+
+[node name="Sniper1" unique_id=806299378 instance=ExtResource("1_0mmfq")]
+MAX_AMMOS = 4
+LASER_LENGTH = 200.0
+LASER_SIDES = 8
+SCALE_DAMAGE = 0.35
+STARTING_AMMOS = 1
+RELOAD_TIME = 1.0
+AMMO_REGAIN_TIME = 1.3
+
+[node name="blaster-e" parent="." index="0" unique_id=336836563 instance=ExtResource("2_iljeb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.051443458, -0.8643283)
