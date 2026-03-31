@@ -11,13 +11,14 @@ var player : Character
 @export var MAX_AMMOS : int = 10
 @export var SCALE_DAMAGE : float = 0.2
 @export var STARTING_AMMOS : int = 2
-@export var RELOAD_TIME : float = 0.2
-@export var AMMO_REGAIN_TIME : float = 0.6
-@export var REGAIN_COOLDOWN : float = 0.5
+@export var RELOAD_TIME : float = 0.15
+@export var AMMO_REGAIN_TIME : float = 0.5
+@export var REGAIN_COOLDOWN : float = 0.3
 @export_category("Laser")
 @export var LASER_LENGTH : float = 80.0
 @export var LASER_SIDES : int = 3
 @export var LASER_FALL_ACCEL : float = 0.01
+@export var LASER_DURAATION : float = 1.0
 @export var laser_scene = preload("res://weapons/projectiles/laser_ray.tscn")
 
 var ammos : int = 0
@@ -86,6 +87,7 @@ func create_laser(id : int, parameters : Array) -> void:
 	laser.material_override.emission = Global.players_dict[id]["laser_color"]
 	laser.sides = LASER_SIDES
 	laser.fall_accel = LASER_FALL_ACCEL
+	laser.duration = LASER_DURAATION
 	player.get_parent().add_child(laser)
 
 func get_laser_parameters() -> Array:

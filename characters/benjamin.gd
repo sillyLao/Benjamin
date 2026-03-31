@@ -7,6 +7,7 @@ var map : Node3D
 @onready var invulnerability_timer : Timer = $Invulnerability
 @onready var animation_player = $AnimationPlayer
 
+@export var death_particles_scene : PackedScene = preload("res://characters/components/death_particles.tscn")
 @export var blaster : Blaster
 @export var pet : Node3D
 
@@ -36,6 +37,7 @@ func _enter_tree():
 
 func _ready():
 	if is_multiplayer_authority():
+		$Invulnerability.start()
 		equip()
 		#blaster.reparent(hand, false)
 		$Sketchfab_Scene.hide()
@@ -52,7 +54,7 @@ func position_spawn():
 	if spawn_node:
 		position = spawn_node.position
 		rotation = spawn_node.rotation
-	print("["+str(multiplayer.get_unique_id())+"] " + str(spawn_node))
+	#print("["+str(multiplayer.get_unique_id())+"] " + str(spawn_node))
 
 func _physics_process(delta):
 	var input_dir : Vector2
@@ -73,8 +75,12 @@ func _physics_process(delta):
 			else:
 				UIOverlay.progress_bar.self_modulate = Color(0.8, 0.0, 0.0)
 			if is_on_ceiling() and is_on_floor() and !invulnerable:
-				crushed_too_big()
+				if goal_scale < 1.0:
+					crushed_too_big()
 		scale = Vector3.ONE*lerp(scale.x, goal_scale, 0.2)
+		
+		if is_multiplayer_authority():
+			UIOverlay.pet_cooldown_pb.value = (pet.cooldown - pet.cooldown_timer.time_left)/pet.cooldown
 
 func _input(event : InputEvent) -> void:
 	if is_multiplayer_authority() and not Global.paused and not is_dead:
@@ -88,6 +94,8 @@ func _input(event : InputEvent) -> void:
 					blaster.shoot()
 				"pet":
 					use_pet()
+		if event.is_action_pressed("kill"):
+			fell_to_death()
 
 
 @rpc("any_peer", "call_local", "reliable")
@@ -100,7 +108,6 @@ func update_ammos(count):
 
 func _on_feet_box_area_entered(area):
 	if is_multiplayer_authority():
-		print(area)
 		if area.name == "PlayerArea":
 			var player : CharacterBody3D = area.get_parent()
 			if player.scale.x <= scale.x/2.0 and not player.name == name:
@@ -132,14 +139,24 @@ func crushed_too_big():
 	Global.add_kill_death.rpc(0, int(name))
 	UIOverlay.spawn_kill_line.rpc(0, int(name), "crushed_self")
 
+func fell_to_death():
+	is_dead = true
+	UIOverlay.spawn_notification({
+		"icon" : "res://icon.svg",
+		"text" : "Vous êtes fatalement tombé.e !!",
+		"timer" : 3
+	})
+	disappear.rpc(int(name))
+	get_node("RespawnTimer").start()
+	Global.add_kill_death.rpc(0, int(name))
+	UIOverlay.spawn_kill_line.rpc(0, int(name), "crushed_self")
+
 @rpc("any_peer", "call_remote", "reliable")
 func touched(from: int, to: int):
 	var node : Character = get_node("../"+str(to))
 	var pos = get_node("../"+str(from)).position
 	UIOverlay.spawn_hit_pos_indicator(pos, Global.players_dict[from]["laser_color"])
 	node.goal_scale -= blaster.SCALE_DAMAGE
-	print(goal_scale)
-	print(MIN_SCALE)
 	if node.goal_scale <= node.MIN_SCALE:
 		node.is_dead = true
 		UIOverlay.spawn_notification({
@@ -174,6 +191,13 @@ func disappear(id : int): # is killed
 	player.hide()
 	player.get_node("PlayerArea").collision_layer = 0
 	player.get_node("Collisions").disabled = true
+	var death_particles : GPUParticles3D = death_particles_scene.instantiate()
+	death_particles.position = player.position
+	death_particles.material_override = death_particles.draw_pass_1.surface_get_material(0).duplicate()
+	death_particles.material_override.albedo_color = Global.players_dict[id]["laser_color"]
+	death_particles.material_override.emission = Global.players_dict[id]["laser_color"]
+	get_parent().add_child(death_particles)
+	death_particles.emitting = true
 	if int(name) == id:
 		die()
 
@@ -187,6 +211,7 @@ func respawn_at(pos : String):
 	rotation = get_parent().get_node("Map/Respawns/" + pos).rotation
 	scale = Vector3.ONE
 	goal_scale = 1.0
+	velocity = Vector3.ZERO
 	invulnerability_timer.start()
 	is_dead = false
 	respawn_player.rpc(int(name))
@@ -228,21 +253,36 @@ func equip_weapon():
 	hand.add_child(weapon)
 	#weapon.position = Vector3.ZERO
 
+func get_pet_parameters() -> Array:
+	var spawn_pos = hand.global_position
+	var v : Vector3 = Vector3.FORWARD.rotated(Vector3(1, 0, 0), camera.rotation.x)
+	v = v.rotated(Vector3(0, 1, 0), global_rotation.y) * pet.throw_speed
+	v = v + velocity
+	var r = Vector3(camera.rotation.x, rotation.y, 0)
+	return [spawn_pos, v, r]
+
 func use_pet() -> void:
 	if pet.cooldown_timer.is_stopped():
 		pet.cooldown_timer.start()
-		var new_pet = pet.duplicate()
-		new_pet.spawn_position = hand.global_position
-		var v : Vector3 = Vector3.FORWARD.rotated(Vector3(1, 0, 0), camera.rotation.x)
-		v = v.rotated(Vector3(0, 1, 0), global_rotation.y) * new_pet.throw_speed
-		v = v + velocity
-		print(v)
-		print(camera.rotation.x)
-		new_pet.spawn_velocity = v
-		new_pet.source = false
-		new_pet.rotation = Vector3(camera.rotation.x, rotation.y, 0)
-		map.add_child.call_deferred(new_pet)
+		spawn_pet.rpc(get_pet_parameters())
 
+@rpc("any_peer", "call_local", "reliable")
+func spawn_pet(param : Array):
+	var new_pet = pet.duplicate()
+	new_pet.spawn_position = param[0]
+	new_pet.spawn_velocity = param[1]
+	new_pet.source = false
+	new_pet.rotation = param[2]
+	get_parent().pets.add_child.call_deferred(new_pet)
 
 func _on_invulnerability_timeout():
-	invulnerable = false
+	invul_off(name.to_int())
+
+@rpc("any_peer", "call_local", "reliable")
+func invul_off(id : int):
+	get_node("../"+str(id)).invulnerable = false
+
+func teleport(pos : Vector3, rot : Vector3):
+	velocity = velocity.rotated(Vector3.UP, rot.y-rotation.y)
+	position = pos
+	rotation = rot

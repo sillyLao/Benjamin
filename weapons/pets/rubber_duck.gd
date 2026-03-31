@@ -13,11 +13,14 @@ var original : bool = true
 var spawn_position : Vector3
 var spawn_velocity : Vector3
 var shrink : bool = false
+var player : Character
 
 func _ready() -> void:
 	hide()
 	freeze = true
+	collision_layer = 0
 	if not source:
+		collision_layer = 2
 		freeze = false
 		show()
 	if not original:
@@ -42,7 +45,7 @@ func replicate() -> void:
 		duck.spawn_velocity = get_vector() * 5
 		duck.original = false
 		duck.rotation = rotation
-		get_parent().add_child(duck)
+		get_parent().add_child(duck, true)
 	replication_waves += -1
 	if replication_waves == 0:
 		queue_free()

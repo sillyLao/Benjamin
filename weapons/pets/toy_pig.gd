@@ -14,6 +14,7 @@ var spawn_velocity : Vector3
 var shrink : bool = false
 @export var prey : Character 
 var gdelta : float 
+var player : Character
 
 func _ready() -> void:
 	hide()

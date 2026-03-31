@@ -18,7 +18,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_8wic7")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7r3x"]
 
-[node name="OnlineMenu" type="Control"]
+[node name="OnlineMenu" type="Control" unique_id=1722448421]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,10 +29,10 @@ mouse_filter = 2
 script = ExtResource("1_uy4li")
 online_lobby_scene = ExtResource("2_q7r3x")
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=685944121]
 timeout = 10.0
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=153389634]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +42,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.28235295, 0.13725491, 0.13333334, 1)
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1618474001]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -55,7 +55,7 @@ theme_override_fonts/font = SubResource("SystemFont_hetcf")
 theme_override_font_sizes/font_size = 86
 text = "ONLINE"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=608213035]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -70,7 +70,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 369
 
-[node name="HOST" type="Button" parent="HBoxContainer"]
+[node name="HOST" type="Button" parent="HBoxContainer" unique_id=1507499456]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_mode = 0
@@ -78,7 +78,7 @@ theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
 text = "HOST"
 
-[node name="JOIN" type="Button" parent="HBoxContainer"]
+[node name="JOIN" type="Button" parent="HBoxContainer" unique_id=1785766861]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 focus_mode = 0
@@ -86,7 +86,7 @@ theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
 text = "JOIN"
 
-[node name="HostPanel" type="PanelContainer" parent="."]
+[node name="HostPanel" type="PanelContainer" parent="." unique_id=653703664]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -102,80 +102,80 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_uy4li")
 
-[node name="MarginContainer" type="MarginContainer" parent="HostPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="HostPanel" unique_id=1220318966]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HostPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HostPanel/MarginContainer" unique_id=1744474974]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Pseudo" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+[node name="Pseudo" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer" unique_id=1248542285]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo" unique_id=288836818]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Pseudo"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo"]
+[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/Pseudo" unique_id=613908228]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 max_length = 25
 
-[node name="IP" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+[node name="IP" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer" unique_id=165340724]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/IP" unique_id=1100248796]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Room Name"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/IP"]
+[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/IP" unique_id=359242232]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 max_length = 25
 
-[node name="PORT" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+[node name="PORT" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer" unique_id=473354551]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/PORT" unique_id=546235401]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "PORT"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/PORT"]
+[node name="TextEdit" type="LineEdit" parent="HostPanel/MarginContainer/VBoxContainer/PORT" unique_id=974734560]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 max_length = 25
 
-[node name="MODE" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer"]
+[node name="MODE" type="HBoxContainer" parent="HostPanel/MarginContainer/VBoxContainer" unique_id=773830162]
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/MODE"]
+[node name="Label" type="Label" parent="HostPanel/MarginContainer/VBoxContainer/MODE" unique_id=849994715]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "MODE"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="OptionButton" parent="HostPanel/MarginContainer/VBoxContainer/MODE"]
+[node name="TextEdit" type="OptionButton" parent="HostPanel/MarginContainer/VBoxContainer/MODE" unique_id=1230005071]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -186,21 +186,22 @@ popup/item_0/id = 0
 popup/item_1/text = "COOP"
 popup/item_1/id = 1
 
-[node name="HSeparator" type="HSeparator" parent="HostPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HostPanel/MarginContainer/VBoxContainer" unique_id=1090199162]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_q7r3x")
 
-[node name="HOST" type="Button" parent="HostPanel/MarginContainer/VBoxContainer"]
+[node name="HOST" type="Button" parent="HostPanel/MarginContainer/VBoxContainer" unique_id=149724804]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
+disabled = true
 text = "HOST"
 
-[node name="JoinPanel" type="PanelContainer" parent="."]
+[node name="JoinPanel" type="PanelContainer" parent="." unique_id=1577713041]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -216,86 +217,87 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_uy4li")
 
-[node name="MarginContainer" type="MarginContainer" parent="JoinPanel"]
+[node name="MarginContainer" type="MarginContainer" parent="JoinPanel" unique_id=1245290043]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="JoinPanel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="JoinPanel/MarginContainer" unique_id=787473523]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="Pseudo" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+[node name="Pseudo" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer" unique_id=906042315]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
+[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo" unique_id=497635721]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Pseudo"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo"]
+[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/Pseudo" unique_id=75941113]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 max_length = 25
 
-[node name="IP" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+[node name="IP" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer" unique_id=446880954]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
+[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/IP" unique_id=796806899]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "IP"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/IP"]
+[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/IP" unique_id=1259998475]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 max_length = 25
 
-[node name="PORT" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+[node name="PORT" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer" unique_id=33311085]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
+[node name="Label" type="Label" parent="JoinPanel/MarginContainer/VBoxContainer/PORT" unique_id=1314561670]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "PORT"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/PORT"]
+[node name="TextEdit" type="LineEdit" parent="JoinPanel/MarginContainer/VBoxContainer/PORT" unique_id=862712166]
 custom_minimum_size = Vector2(230, 45)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 max_length = 25
 
-[node name="MODE" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer"]
+[node name="MODE" type="HBoxContainer" parent="JoinPanel/MarginContainer/VBoxContainer" unique_id=2041504228]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="JoinPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="JoinPanel/MarginContainer/VBoxContainer" unique_id=309517951]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/separator = SubResource("StyleBoxEmpty_q7r3x")
 
-[node name="JOIN" type="Button" parent="JoinPanel/MarginContainer/VBoxContainer"]
+[node name="JOIN" type="Button" parent="JoinPanel/MarginContainer/VBoxContainer" unique_id=1979934566]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
 theme = ExtResource("1_8wic7")
 theme_override_font_sizes/font_size = 61
+disabled = true
 text = "JOIN"
 
-[node name="BACK" type="Button" parent="."]
+[node name="BACK" type="Button" parent="." unique_id=1844086873]
 layout_mode = 1
 anchors_preset = -1
 offset_left = 40.0
@@ -308,6 +310,8 @@ text = "BACK"
 
 [connection signal="pressed" from="HBoxContainer/HOST" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="HBoxContainer/JOIN" to="." method="_on_join_pressed"]
+[connection signal="text_changed" from="HostPanel/MarginContainer/VBoxContainer/Pseudo/TextEdit" to="." method="_on_host_pseudo_text_edit_text_changed"]
 [connection signal="pressed" from="HostPanel/MarginContainer/VBoxContainer/HOST" to="." method="_on_host_2_pressed"]
+[connection signal="text_changed" from="JoinPanel/MarginContainer/VBoxContainer/Pseudo/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="JoinPanel/MarginContainer/VBoxContainer/JOIN" to="." method="_on_join_2_pressed"]
 [connection signal="pressed" from="BACK" to="." method="_on_back_pressed"]

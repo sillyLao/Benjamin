@@ -9,6 +9,7 @@ extends Control
 @onready var menu_music = $MenuMusic
 @onready var game_timer = $"IG UI/Time/Timer"
 @onready var blaster_reload = $"IG UI/BlasterReload"
+@onready var pet_cooldown_pb = $"IG UI/Cooldowns/Pet/ProgressBar"
 
 var kill_methods : Dictionary = {
 	"shrink" : "res://assets/ui/kill_shrink.png",

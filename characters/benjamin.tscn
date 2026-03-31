@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://dv2c1orhaxywb" path="res://characters/camera_3d.gd" id="2_e3a86"]
 [ext_resource type="PackedScene" uid="uid://oh28tb74mfbe" path="res://assets/models/man/scene.gltf" id="3_rfwun"]
 [ext_resource type="PackedScene" uid="uid://dkxkqmua7sd6f" path="res://weapons/blaster_1.tscn" id="4_thw78"]
-[ext_resource type="PackedScene" uid="uid://bd8tnuu27seej" path="res://weapons/pets/toy_pig.tscn" id="5_e3a86"]
 [ext_resource type="PackedScene" uid="uid://b3jm323xtf7vv" path="res://weapons/pets/rubber_duck.tscn" id="6_rfwun"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_easfn"]
@@ -19,16 +18,16 @@ height = 1.8847852
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hjy4p"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/replication_mode = 2
+properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/replication_mode = 2
+properties/1/replication_mode = 1
 properties/2/path = NodePath(".:scale")
 properties/2/spawn = true
-properties/2/replication_mode = 2
+properties/2/replication_mode = 1
 properties/3/path = NodePath(".:invulnerable")
 properties/3/spawn = true
-properties/3/replication_mode = 2
+properties/3/replication_mode = 1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2s8rh"]
 height = 0.3052246
@@ -155,15 +154,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.024477556, 0)
 shape = SubResource("CylinderShape3D_2s8rh")
 debug_color = Color(0.70196074, 0, 0.0154072065, 0.41960785)
 
-[node name="ToyPig" parent="." unique_id=1289180663 node_paths=PackedStringArray("prey") instance=ExtResource("5_e3a86")]
-visible = false
-source = true
-prey = NodePath("..")
-
 [node name="RubberDuck" parent="." unique_id=1105729414 instance=ExtResource("6_rfwun")]
 visible = false
 source = true
-cooldown = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=801430729]
 libraries/ = SubResource("AnimationLibrary_hjy4p")

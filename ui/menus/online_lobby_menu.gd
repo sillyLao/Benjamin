@@ -1,7 +1,10 @@
 extends Control
 
+@export var map_list : Dictionary[String, String]
+
 var back_pressed : bool = false
 var checkmark = preload("res://assets/ui/check.png")
+
 
 var selected_character : String = "benjamin"
 var selected_weapon : String = "blaster1"
@@ -12,7 +15,7 @@ var selected_pet : String = "rubber_duck"
 func _ready():
 	hide_customize()
 	update_ready()
-	send_game_settings(Global.game_settings)
+	_on_ok_pressed()
 	$WeaponSelectionScreen.hide()
 	if Global.players_dict:
 		if Global.players_dict[multiplayer.get_unique_id()]["ready"]:
@@ -35,6 +38,8 @@ func _ready():
 
 func _peer_connected(id : int):
 	print("["+str(multiplayer.get_unique_id())+"]  " + str(id) + " connected.")
+	if Global.is_host:
+		send_game_settings.rpc(Global.game_settings)
 
 func _peer_disconnected(id : int):
 	Global.players_dict.erase(id)
@@ -110,13 +115,14 @@ func _on_back_pressed():
 
 func _on_start_game_pressed():
 	if Global.is_host:
-		start_game.rpc()
+		var map = get_map_path()
+		start_game.rpc(map)
 
 @rpc("authority", "call_local", "reliable")
-func start_game():
+func start_game(map : String):
 	Global.in_game = true
 	Global.switch_to_game()
-	get_tree().change_scene_to_file("res://maps/Labpark.tscn")
+	get_tree().change_scene_to_file(map)
 
 
 func _on_copy_ip_pressed():
@@ -135,6 +141,7 @@ func _on_ready_toggled(toggled_on):
 	set_ready.rpc(multiplayer.get_unique_id(), toggled_on)
 	send_ready_infos.rpc(multiplayer.get_unique_id(), get_ready_infos())
 	block_customize()
+	$GameSettings/List/VBoxContainer/Edit.disabled = toggled_on
 
 func get_ready_infos() -> Dictionary:
 	var infos = {
@@ -188,20 +195,26 @@ func send_game_settings(game_settings: Dictionary):
 			$GameSettings/List/VBoxContainer/Score.show()
 			$GameSettings/List/VBoxContainer/Time.hide()
 			UIOverlay.game_timer.get_parent().hide()
+	print(game_settings)
 
 
 func _on_edit_pressed():
 	$GameSettings/List.hide()
 	$GameSettings/Edit.show()
+	$Ready.disabled = true
 
 func _on_ok_pressed():
+	if not Global.is_host:
+		return
 	$GameSettings/List.show()
 	$GameSettings/Edit.hide()
+	$Ready.disabled = false
 	var settings1 := ["GameMode", "Format", "Teams", "WinCon", "Map"]
 	var game_settings := {}
 	for key in settings1:
 		var ob : OptionButton = $GameSettings/Edit/VBoxContainer.get_node(key +"/OptionButton")
 		game_settings[key] = ob.get_item_text(ob.selected)
+		print(ob.get_item_text(ob.selected))
 	if game_settings["Format"] == "Free for all":
 		game_settings["Teams"] = "No teams"
 	var settings2 := ["Time", "Score"]
@@ -264,3 +277,7 @@ func switch_item() -> void:
 
 func switch_pet() -> void:
 	pass
+
+
+func get_map_path() -> String:
+	return map_list[Global.game_settings["Map"].to_snake_case()]

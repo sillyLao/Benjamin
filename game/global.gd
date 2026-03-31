@@ -40,7 +40,7 @@ var game_settings : Dictionary = {
 	"WinCon" : "Time",
 	"Time" : 300,
 	"Score" : 10,
-	"Map" : "MapTest",
+	"Map" : "labpark",
 }
 
 
@@ -77,7 +77,7 @@ func _server_disconnected():
 					"text" : Global.players_dict[1]["pseudo"] + " closed the lobby.",
 					"timer" : 5
 				})
-				get_tree().change_scene_to_file("res://scenes/Menu/main_menu.tscn")
+				get_tree().change_scene_to_file("res://ui/menus/main_menu.tscn")
 
 @rpc("any_peer", "call_local", "reliable")
 func add_kill_death(kill: int, death: int):
@@ -87,6 +87,6 @@ func add_kill_death(kill: int, death: int):
 	if death:
 		players_score[death]["deaths"] += 1
 		UIOverlay.tab.get_node(str(death) + "/MarginContainer/HBoxContainer/Deaths").text = str(players_score[death]["deaths"])
-	if game_settings["WinCon"] == "Score":
+	if game_settings["WinCon"] == "Score" and kill:
 		if players_score[kill]["kills"] >= game_settings["Score"]:
 			UIOverlay.end_game()

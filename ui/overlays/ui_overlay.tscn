@@ -7,18 +7,25 @@
 [ext_resource type="Theme" uid="uid://cs56nwbxtnkb0" path="res://themes/ig_ammos.tres" id="3_g0uky"]
 [ext_resource type="Script" uid="uid://ctjow75qs4pmr" path="res://ui/overlays/scale_bar.gd" id="4_cp3pj"]
 [ext_resource type="AudioStream" uid="uid://c07ycv6o2j4hk" path="res://assets/audio/Gymnopedie No. 1 - Erik Satie.mp3" id="5_jaqk0"]
+[ext_resource type="Texture2D" uid="uid://cs6jl2kk5eb4y" path="res://assets/ui/pets_icons/rubber_duck.png" id="5_u8r8j"]
 [ext_resource type="AudioStream" uid="uid://dgk6jk4cqdisx" path="res://assets/audio/online musics/imagine_if_gaia_woufeuse_got_a_low_taper_fade.mp3" id="6_2lol6"]
 [ext_resource type="AudioStream" uid="uid://b13puwepwals0" path="res://assets/audio/online musics/IMITATE_U.mp3" id="7_dghs7"]
 [ext_resource type="AudioStream" uid="uid://d0pujsbfs7fl2" path="res://assets/audio/online musics/LES_____DE_CITÉ.mp3" id="8_2s84o"]
 [ext_resource type="AudioStream" uid="uid://0n7exd3idrf4" path="res://assets/audio/online musics/STUPEFIANTE.mp3" id="9_6pmgl"]
 [ext_resource type="AudioStream" uid="uid://dmf0qxrtrfvsm" path="res://assets/audio/online musics/STUPEFIANTE_but_in_english_awesome.mp3" id="10_7phbs"]
 [ext_resource type="AudioStream" uid="uid://be6srhjnhvdwo" path="res://assets/audio/online musics/SUICIDAL.mp3" id="11_rmv56"]
+[ext_resource type="AudioStream" uid="uid://dkh7wqjtjj33f" path="res://assets/audio/online musics/PISSGOBLIN - CALL THE DOCTOR - woufeuse.mp3" id="15_16np2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0uky"]
 bg_color = Color(0, 0, 0, 0.20784314)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaqk0"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_43tx8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8r8j"]
+bg_color = Color(0.6, 0.6, 0.6, 0.45490196)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvqy2"]
 bg_color = Color(0.171875, 0.171875, 0.171875, 1)
@@ -122,7 +129,7 @@ _data = {
 }
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tyfjk"]
-streams_count = 6
+streams_count = 7
 stream_0/stream = ExtResource("6_2lol6")
 stream_1/stream = ExtResource("7_dghs7")
 stream_2/stream = ExtResource("8_2s84o")
@@ -131,6 +138,7 @@ stream_3/weight = 0.98
 stream_4/stream = ExtResource("10_7phbs")
 stream_4/weight = 0.02
 stream_5/stream = ExtResource("11_rmv56")
+stream_6/stream = ExtResource("15_16np2")
 
 [node name="UIOverlay" type="Control" unique_id=340951318]
 z_index = 2
@@ -214,6 +222,54 @@ layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_g0uky")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jaqk0")
 show_percentage = false
+
+[node name="Cooldowns" type="Control" parent="IG UI" unique_id=943299193]
+layout_mode = 1
+anchor_left = 0.20833333
+anchor_top = 0.8441358
+anchor_right = 0.2777778
+anchor_bottom = 0.9675926
+metadata/_edit_use_anchors_ = true
+
+[node name="Pet" type="Control" parent="IG UI/Cooldowns" unique_id=1106827152]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="IG UI/Cooldowns/Pet" unique_id=475792395]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_43tx8")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u8r8j")
+max_value = 1.0
+step = 0.0
+value = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="IG UI/Cooldowns/Pet" unique_id=1426776076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="IG UI/Cooldowns/Pet/MarginContainer" unique_id=925232200]
+layout_mode = 2
+texture = ExtResource("5_u8r8j")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="ScaleBar" type="Control" parent="IG UI" unique_id=452780303]
 layout_mode = 1

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bph3n0vvuxslh"]
+
+[ext_resource type="Script" uid="uid://bc7py1kbbhtm7" path="res://characters/components/death_particles.gd" id="1_jlvbc"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_thw78"]
+lifetime_randomness = 0.6
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, 1, 0)
+spread = 40.0
+initial_velocity_min = 3.0
+initial_velocity_max = 9.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.29999998
+anim_speed_min = 2.0
+anim_speed_max = 2.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_easfn"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.48
+disable_receive_shadows = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+distance_fade_mode = 1
+
+[sub_resource type="PrismMesh" id="PrismMesh_c4ypi"]
+material = SubResource("StandardMaterial3D_easfn")
+size = Vector3(0.06, 0.06, 0.06)
+
+[node name="GPUParticles3D" type="GPUParticles3D" unique_id=423636679]
+emitting = false
+amount = 100
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_thw78")
+draw_pass_1 = SubResource("PrismMesh_c4ypi")
+script = ExtResource("1_jlvbc")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -50,6 +50,8 @@ albedo_color = Color(0, 0.43137255, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmjjy"]
 albedo_color = Color(0.5294118, 0.23921569, 0, 1)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_c8twx"]
+
 [node name="Labpark" type="Node3D" unique_id=1000494257]
 script = ExtResource("1_nvmba")
 
@@ -62,7 +64,7 @@ shadow_enabled = true
 shadow_blur = 5.0
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=611495490]
-_spawnable_scenes = PackedStringArray("uid://b7r3i1ls2ja54", "uid://dkxkqmua7sd6f", "uid://c4rlnusgyma78")
+_spawnable_scenes = PackedStringArray("uid://b7r3i1ls2ja54")
 spawn_path = NodePath("..")
 
 [node name="Map" type="Node3D" parent="." unique_id=913963142]
@@ -1341,7 +1343,7 @@ wait_time = 5.0
 one_shot = true
 
 [node name="Node3D3" type="Node3D" parent="Map/Respawns" unique_id=2071693251]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3417296, -2.072752, -45.30783)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.3417296, -2.072752, -45.30783)
 
 [node name="Timer" type="Timer" parent="Map/Respawns/Node3D3" unique_id=1750602450]
 wait_time = 5.0
@@ -1408,7 +1410,11 @@ shadow_enabled = true
 shadow_caster_mask = 4294967293
 omni_range = 30.0
 
-[node name="Players" type="Node3D" parent="." unique_id=437700062]
+[node name="Kill Zone" type="Area3D" parent="Map" unique_id=1334269590]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Kill Zone" unique_id=1161608984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -76.960594, 0)
+shape = SubResource("WorldBoundaryShape3D_c8twx")
 
 [node name="Pets" type="Node3D" parent="." unique_id=1933189758]
 

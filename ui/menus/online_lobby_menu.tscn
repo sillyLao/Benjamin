@@ -43,6 +43,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_vdcme")
+map_list = Dictionary[String, String]({
+"kokiri": "res://maps/kokiri.tscn",
+"labpark": "res://maps/labpark.tscn",
+"mario_64": "res://maps/mario64.tscn",
+"parklab": "res://maps/parklab.tscn"
+})
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1026522628]
 layout_mode = 1
@@ -459,7 +465,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_f1llj")
 [node name="Label" type="Label" parent="GameSettings/List/VBoxContainer/Map" unique_id=1327705987]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "MapTest"
+text = "labpark"
 
 [node name="KitRestrictions" type="HBoxContainer" parent="GameSettings/List/VBoxContainer" unique_id=1011157835]
 layout_mode = 2
@@ -650,11 +656,15 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 selected = 0
 fit_to_longest_item = false
-item_count = 2
-popup/item_0/text = "MapTest"
+item_count = 4
+popup/item_0/text = "labpark"
 popup/item_0/id = 0
-popup/item_1/text = "Atoll-Lone"
+popup/item_1/text = "parklab"
 popup/item_1/id = 1
+popup/item_2/text = "Kokiri"
+popup/item_2/id = 2
+popup/item_3/text = "mario64"
+popup/item_3/id = 3
 
 [node name="KitRestrictions" type="HBoxContainer" parent="GameSettings/Edit/VBoxContainer" unique_id=1997878012]
 layout_mode = 2

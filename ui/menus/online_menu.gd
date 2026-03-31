@@ -1,12 +1,15 @@
 extends Control
 
 @onready var http_request = $HTTPRequest
+@onready var port_host = $HostPanel/MarginContainer/VBoxContainer/PORT/TextEdit
+@onready var port_join = $JoinPanel/MarginContainer/VBoxContainer/PORT/TextEdit
 
 @export var online_lobby_scene : PackedScene
 
 var peer : ENetMultiplayerPeer = ENetMultiplayerPeer.new()
 var host_ip : String
 var join_ip : String
+var port : int
 
 func _ready():
 	http_request.request_completed.connect(_on_request_completed)
@@ -27,7 +30,10 @@ func _on_join_pressed():
 	$HostPanel.hide()
 	$JoinPanel.show()
 func _on_host_2_pressed():
-	var result = peer.create_server(51779, 7)
+	port = port_host.text.to_int()
+	if not port:
+		port = 49094
+	var result = peer.create_server(port, 7)
 	match result:
 		Error.OK:
 			print("OK")
@@ -41,7 +47,10 @@ func _on_join_2_pressed():
 	join_ip = $JoinPanel/MarginContainer/VBoxContainer/IP/TextEdit.text
 	if not join_ip:
 		join_ip = "127.0.0.1"
-	var result = peer.create_client(join_ip, 51779)
+	port = port_join.text.to_int()
+	if not port:
+		port = 49094
+	var result = peer.create_client(join_ip, port)
 	match result:
 		Error.OK:
 			print("OK")
@@ -68,3 +77,18 @@ func connected(type : String):
 
 func _on_back_pressed():
 	get_tree().change_scene_to_file("res://ui/menus/main_menu.tscn")
+
+
+func _on_host_pseudo_text_edit_text_changed(new_text):
+	if new_text:
+		$HostPanel/MarginContainer/VBoxContainer/HOST.disabled = false
+	else:
+		$HostPanel/MarginContainer/VBoxContainer/HOST.disabled = true
+		
+
+
+func _on_text_edit_text_changed(new_text):
+	if new_text:
+		$JoinPanel/MarginContainer/VBoxContainer/JOIN.disabled = false
+	else:
+		$JoinPanel/MarginContainer/VBoxContainer/JOIN.disabled = true

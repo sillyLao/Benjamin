@@ -39,7 +39,7 @@ func position_spawn():
 	if spawn_node:
 		position = spawn_node.position
 		rotation = spawn_node.rotation
-	print("["+str(multiplayer.get_unique_id())+"] " + str(spawn_node))
+	#print("["+str(multiplayer.get_unique_id())+"] " + str(spawn_node))
 
 func _physics_process(delta):
 	var input_dir : Vector2
@@ -60,7 +60,7 @@ func _physics_process(delta):
 				UIOverlay.progress_bar.self_modulate = Color(0.8, 0.0, 0.0)
 			if is_on_ceiling() and is_on_floor():
 				crushed_too_big()
-				print(scale.x)
+				#print(scale.x)
 			
 
 func _input(event : InputEvent) -> void:

@@ -1,6 +1,5 @@
 extends Node3D
 
-@onready var players = $Players
 @onready var pets = $Pets
 
 
@@ -16,6 +15,7 @@ func _ready():
 		spawn_players()
 		Global.launch_online_game.rpc()
 	Global.current_map = self
+	$"Map/Kill Zone".area_entered.connect(_on_kill_zone_area_entered)
 
 func spawn_players():
 	var spawn_dict : Dictionary
@@ -24,11 +24,11 @@ func spawn_players():
 		spawn_dict[id] = {}
 		new_player.name = str(id)
 		new_player.map = self
-		players.add_child(new_player)
+		add_child(new_player)
 		new_player.invulnerability_timer.start()
-	assign_spawn(spawn_dict, 1)
+	assign_spawn(spawn_dict)
 
-func assign_spawn(spawn_dict: Dictionary, player):
+func assign_spawn(spawn_dict: Dictionary):
 	for id in Global.players_dict:
 		if not spawn_dict:
 			spawn_dict[id] = {}
@@ -39,8 +39,8 @@ func assign_spawn(spawn_dict: Dictionary, player):
 
 @rpc("authority", "call_local", "reliable")
 func assign_spawn_node(dict: Dictionary):
-	get_node("Players/"+str(multiplayer.get_unique_id())).spawn_node = get_node("Map/Respawns/"+dict[multiplayer.get_unique_id()]["node"])
-	get_node("Players/"+str(multiplayer.get_unique_id())).position_spawn()
+	get_node(str(multiplayer.get_unique_id())).spawn_node = get_node("Map/Respawns/"+dict[multiplayer.get_unique_id()]["node"])
+	get_node(str(multiplayer.get_unique_id())).position_spawn()
 
 func check_respawns():
 	available_respawns.clear()
@@ -53,14 +53,13 @@ func respawn(id : int):
 	var n = randi_range(0, len(available_respawns)-1)
 	var respawn_node = available_respawns.pop_at(n)
 	respawn_node.get_node("Timer").start()
-	get_node("Players/"+str(id)).respawn_at.rpc_id(id, respawn_node.name)
+	get_node(str(id)).respawn_at.rpc_id(id, respawn_node.name)
 
 func _on_player_quits(id: int):
-	get_node("Players/"+str(id)).queue_free()
+	get_node(str(id)).queue_free()
 
-#func equip_weapon(player, id):
-	#print("[" + str(multiplayer.get_unique_id()) + "] id : " + str(id) + " | player : " + str(player) + " | authority : " + str(player.is_multiplayer_authority()))
-	#var path = load("res://weapons/" + Global.players_dict[id]["weapon"].to_snake_case() + ".tscn")
-	#var weapon = path.instantiate()
-	#player.add_child(weapon)
-	#player.blaster = weapon
+
+func _on_kill_zone_area_entered(area):
+	if area.name == "PlayerArea":
+		var player : Character = area.get_parent()
+		player.fell_to_death()
